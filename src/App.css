@@ -1,0 +1,57 @@
+.app-wrapper {
+  /*Все первые потомки класса app-wrapper(header, nav) будут в виде сетки*/
+  display: grid;
+  grid-template-areas:
+  "header header"
+  "nav content";
+  grid-template-rows:  100px 1fr;
+  grid-template-columns: 1fr 5fr;
+  /*grid-gap: 10px;*/
+
+  width: 1700px;
+  /*margin 0 auto; - верхний нижний отступы 0, справа слева auto*/
+  margin: 0 auto;
+}
+
+li {
+  list-style-type: none;
+  font-size: 20px;
+  text-decoration: none;
+}
+ul {
+  padding-left: 0;
+}
+
+
+.profile-img {
+  width: 1300px;
+}
+.logo {
+  width: 60px;
+  height: 60px;
+}
+
+.header {
+  grid-area: header;
+  background-color: chartreuse;
+  padding-top: 10px;
+}
+
+.nav {
+  grid-area: nav;
+  background-color: deepskyblue;
+  padding-top: 10px;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.profile {
+  grid-area: content;
+  background-color: darkgray;
+  padding-top: 10px;
+  margin-top: 20px;
+}
+
+.a {
+  text-decoration: none;
+}
