@@ -1,0 +1,10 @@
+.logo {
+    width: 60px;
+    height: 60px;
+}
+
+.header {
+    grid-area: header;
+    background-color: chartreuse;
+    padding-top: 10px;
+}

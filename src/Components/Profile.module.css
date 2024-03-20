@@ -1,0 +1,18 @@
+.content {
+    grid-area: content;
+    background-color: darkgray;
+    padding-top: 10px;
+    margin-top: 20px;
+}
+
+.profile_img {
+    width: 1300px;
+}
+
+.item {
+    color: chartreuse;
+}
+
+.item.active {
+    color: rebeccapurple;
+}
