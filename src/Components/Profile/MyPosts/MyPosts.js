@@ -11,7 +11,8 @@ const  MyPosts = () => {
                 <button>Remove</button>
             </div>
             <div className={style.posts}>
-                <Post />
+                <Post message='Привет, как ты?'/>
+                <Post message={'Это мой первый пост!'}/>
             </div>
         </div>
     )
