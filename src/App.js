@@ -1,7 +1,7 @@
 import './App.css';
-import Header from "./Components/header";
-import Navbar from "./Components/navbar";
-import Profile from "./Components/profile";
+import Header from "./Components/Header/header.js";
+import Navbar from "./Components/Navbar/navbar.js";
+import Profile from "./Components/Profile/profile.js";
 const App = () => {
   return ( // чтобы добавить еще один блочный тег на одинаковом уровне они должны быть обернуты в общий блочный тег выше уровнем
       <div className={'app-wrapper'}>
