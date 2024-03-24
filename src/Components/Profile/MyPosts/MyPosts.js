@@ -11,8 +11,8 @@ const  MyPosts = () => {
                 <button>Remove</button>
             </div>
             <div className={style.posts}>
-                <Post message='Привет, как ты?'/>
-                <Post message={'Это мой первый пост!'}/>
+                <Post message='Привет, как ты?' likes={'4'}/>
+                <Post message={'Это мой первый пост!'} likes={'20'}/>
             </div>
         </div>
     )
