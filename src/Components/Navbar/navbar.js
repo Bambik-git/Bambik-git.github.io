@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 const Navbar = () => {
     return (
         <nav className={style.nav}>
-            <ul>
+            <ul className={style.listItem}>
                 <li><Link className={style.item} to={'/profile'}>Profile</Link></li>
                 <li><Link to={'/dialogs'}>Messages</Link></li>
                 <li><Link to={'/#'}>News</Link></li>
