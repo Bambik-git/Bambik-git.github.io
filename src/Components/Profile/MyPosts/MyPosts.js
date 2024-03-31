@@ -2,7 +2,7 @@ import style from "./MyPosts.module.css"
 import Post from "./Post/Post.js";
 const  MyPosts = () => {
     return (
-        <div>
+        <div className={style.content}>
             My posts
             <div className={`${style.item} ${style.active}`}><br/>
                 New Post<br/>

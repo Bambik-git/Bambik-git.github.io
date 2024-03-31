@@ -1,0 +1,11 @@
+.profile_img {
+    width: 1300px;
+}
+.item {
+    padding: 10px;
+    color: chartreuse;
+}
+
+.item.active {
+    color: rebeccapurple;
+}
