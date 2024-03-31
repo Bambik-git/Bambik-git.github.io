@@ -6,10 +6,11 @@
     display: grid;
     grid-template-columns: 2fr 1fr 5fr;
 }
-.dialogsItem {
+.dialogsItems {
     margin-left: 40px ;
 }
 .message {
+    margin-left: 40px ;
 }
 .verticalLine {
     border-left: thick solid black;
