@@ -1,6 +1,9 @@
 import style from "./MyPosts.module.css"
 import Post from "./Post/Post.js";
-const  MyPosts = () => {
+const  MyPosts = (props) => {
+
+    let postsElements = props.posts_data.map( posts => <Post message={posts.post_text} likes={posts.likes}/>)
+
     return (
         <div className={style.content}>
             My posts
@@ -11,8 +14,7 @@ const  MyPosts = () => {
                 <button>Remove</button>
             </div>
             <div className={style.posts}>
-                <Post message='Привет, как ты?' likes={'4'}/>
-                <Post message={'Это мой первый пост!'} likes={'20'}/>
+                {postsElements}
             </div>
         </div>
     )
