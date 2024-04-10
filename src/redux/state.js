@@ -1,3 +1,6 @@
+import {reRenderEntireTree} from "../render";
+
+
 let state = {
     profilePage: {
         postsData: [
@@ -23,4 +26,13 @@ let state = {
     }
 }
 
+export let addPost = (postMessage) => {
+    let newPost = {
+        id: 5,
+        post_text: postMessage,
+        likes: 0,
+    }
+    state.profilePage.postsData.push(newPost);
+    reRenderEntireTree(state);
+}
 export default state;
