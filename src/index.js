@@ -1,9 +1,7 @@
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {reRenderEntireTree} from "./render.js";
-import ReactDOM from "react-dom/client";
-import React from "react";
-import App from "./App";
+
 import state from "./redux/state";
 
 
