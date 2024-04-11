@@ -25,15 +25,14 @@ let store = {
         }
     },
 
+    _callSubscriber () {
+    },
+
     getState() {
         return this._state
     },
 
-    _callSubscriber () {
-    },
-
-    addPost(){
-        debugger;
+    _addPost(){
         let newPost = {
             id: 5,
             post_text: this._state.profilePage.NewPostText,
@@ -45,7 +44,6 @@ let store = {
     },
 
     UpdateNewPostText(newText) {
-        debugger;
         this._state.profilePage.NewPostText = newText;
         this._callSubscriber(this._state);
     },
@@ -54,6 +52,24 @@ let store = {
         this._callSubscriber = observer;
     },
 
+    dispatch(action) {
+        switch (action.type) {
+            case 'ADD_POST':
+                this._addPost();
+                break;
+
+            case 'UPDATE_NEW_POST_TEXT':
+                // this._callSubscriber(action.newText)
+                this._state.profilePage.NewPostText = action.newText;
+                this._callSubscriber(this._state);
+                break;
+
+            default:
+                this._callSubscriber(this._state);
+                console.log('Page updated. Nothing changed!')
+                break;
+        }
+    }
 }
 
 export default store;
