@@ -21,7 +21,8 @@ let store = {
                 {id: 1, message:'Yo'},
                 {id: 2, message:'Hi!'},
                 {id: 3, message:'How are you?'}
-            ]
+            ],
+            NewMessageText: '',
         }
     },
 
@@ -61,6 +62,21 @@ let store = {
             case 'UPDATE_NEW_POST_TEXT':
                 // this._callSubscriber(action.newText)
                 this._state.profilePage.NewPostText = action.newText;
+                this._callSubscriber(this._state);
+                break;
+
+            case 'UPDATE_NEW_MESSAGE_TEXT':
+                this._state.dialogsPage.NewMessageText = action.newMessage;
+                this._callSubscriber(this._state);
+                break;
+
+            case 'SEND_MESSAGE':
+                let Message = {
+                    id: 4,
+                    message: this._state.dialogsPage.NewMessageText
+                }
+                this._state.dialogsPage.messagesData.push(Message);
+                this._state.dialogsPage.NewMessageText = '';
                 this._callSubscriber(this._state);
                 break;
 
