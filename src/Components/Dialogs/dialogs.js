@@ -1,6 +1,7 @@
 import React from "react";
 import style from './Dialogs.module.css';
 import {Link} from "react-router-dom";
+import {send_message_ActionCreator, update_new_message_text_ActionCreator} from "../../redux/store";
 
 
 const Dialogs = (props) => {
@@ -12,18 +13,11 @@ const Dialogs = (props) => {
     //event обьект события onChange
     let onNewMessageChange = (event) => {
         let text = event.target.value;
-        let action = {
-            type: 'UPDATE_NEW_MESSAGE_TEXT',
-            newMessage: text
-        }
-        props.dispatch(action)
+        props.dispatch(update_new_message_text_ActionCreator(text))
     }
 
-    let SendMessage = (event) => {
-        let action = {
-            type: 'SEND_MESSAGE',
-        }
-        props.dispatch(action)
+    let SendMessage = () => {
+        props.dispatch(send_message_ActionCreator())
     }
 
     return (
