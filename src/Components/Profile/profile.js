@@ -1,6 +1,7 @@
 import style from "./Profile.module.css"
 import MyPosts from "./MyPosts/MyPosts.js";
 import ProfileInfo from "./ProfileInfo/ProfileInfo.js";
+import MyPostsContrainer from "./MyPosts/MyPostsContainer";
 
 
 
@@ -9,8 +10,7 @@ const Profile = (props) => {
         <div className={style.content}>
             <ProfileInfo/>
 
-            <MyPosts posts_data={props.posts_data}
-                     dispatch={props.dispatch}/>
+            <MyPostsContrainer store={props.store}/>
         </div>
     )
 }

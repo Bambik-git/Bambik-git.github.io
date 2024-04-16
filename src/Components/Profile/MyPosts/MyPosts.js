@@ -1,25 +1,22 @@
 import style from "./MyPosts.module.css"
 import Post from "./Post/Post.js";
 import React from "react";
-import {add_post_ActionCreator, update_new_post_text_ActionCreator} from "../../../redux/store";
-
-
 
 const  MyPosts = (props) => {
-
-    let postsElements = props.posts_data.postsData.map( posts => <Post message={posts.post_text} likes={posts.likes}/>)
+    let postsElements = props.posts
+        .map( posts => <Post message={posts.post_text} likes={posts.likes}/>)
 
     // Создание ссылки и привязка к тегу textarea
     let newPostElement = React.createRef()
 
-    const addPost =() => {
-        debugger;
-        props.dispatch(add_post_ActionCreator());
+    const onAddPost =() => {
+        props.onAddPost();
     }
 
-    let OnPostChange = () => {
+    let onPostChange = () => {
+        debugger;
         let text = newPostElement.current.value
-        props.dispatch(update_new_post_text_ActionCreator(text));
+        props.onPostChange(text);
     }
 
     return (
@@ -28,9 +25,9 @@ const  MyPosts = (props) => {
             <div className={`${style.item} ${style.active}`}><br/>
                 New Post<br/>
                 <textarea ref={newPostElement}
-                          value={props.posts_data.NewPostText}
-                          onChange={OnPostChange} /><br/>
-                <button onClick={addPost}> Add post </button>
+                          value={props.NewPostText}
+                          onChange={onPostChange} /><br/>
+                <button onClick={onAddPost}> Add post </button>
                 <button>Remove</button>
             </div>
             <div className={style.posts}>

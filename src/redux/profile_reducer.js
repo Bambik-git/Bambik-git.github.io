@@ -10,7 +10,7 @@ export const profileReducer = (state=initial_state, action) => {
     debugger;
     switch (action.type) {
         case 'ADD_POST':
-            debugger;
+
             let newPost = {
                 id: 5,
                 post_text: state.NewPostText,
@@ -21,6 +21,7 @@ export const profileReducer = (state=initial_state, action) => {
             return state;
 
         case 'UPDATE_NEW_POST_TEXT':
+
             state.NewPostText = action.newText;
             return state;
 
