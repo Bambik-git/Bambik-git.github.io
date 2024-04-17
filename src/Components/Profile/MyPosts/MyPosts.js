@@ -3,7 +3,7 @@ import Post from "./Post/Post.js";
 import React from "react";
 
 const  MyPosts = (props) => {
-    let postsElements = props.posts
+    let postsElements = props.profileData.postsData
         .map( posts => <Post message={posts.post_text} likes={posts.likes}/>)
 
     // Создание ссылки и привязка к тегу textarea
@@ -25,7 +25,7 @@ const  MyPosts = (props) => {
             <div className={`${style.item} ${style.active}`}><br/>
                 New Post<br/>
                 <textarea ref={newPostElement}
-                          value={props.NewPostText}
+                          value={props.profileData.NewPostText}
                           onChange={onPostChange} /><br/>
                 <button onClick={onAddPost}> Add post </button>
                 <button>Remove</button>

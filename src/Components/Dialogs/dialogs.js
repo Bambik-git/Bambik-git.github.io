@@ -6,9 +6,9 @@ import {send_message_ActionCreator, update_new_message_text_ActionCreator} from 
 
 const Dialogs = (props) => {
 
-    let dialogsElements = props.dialogs.map(dialog => <li><Link to={`/dialogs/` + dialog.id}>{dialog.name}</Link></li>)
-    let messagesElements = props.message.map(message => <li>{message.message}</li>)
-    let NewMessageText = props.newMessageText
+    let dialogsElements = props.dialogsData.dialogsData.map(dialog => <li><Link to={`/dialogs/` + dialog.id}>{dialog.name}</Link></li>)
+    let messagesElements = props.dialogsData.messagesData.map(message => <li>{message.message}</li>)
+    let NewMessageText = props.dialogsData.NewMessageText
 
     //event обьект события onChange
     let onNewMessageChange = (event) => {

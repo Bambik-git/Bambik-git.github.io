@@ -120,6 +120,4 @@ export const update_new_post_text_ActionCreator = (text) => {
     return { type: UPDATE_NEW_POST_TEXT, newText: text }
 }
 
-
-
 export default store;
