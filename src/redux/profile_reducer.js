@@ -7,27 +7,30 @@ let initial_state = {
     NewPostText: ''}
 
 export const profileReducer = (state=initial_state, action) => {
-    debugger;
-    switch (action.type) {
-        case 'ADD_POST':
+    let state_copy = {...state};
 
+    switch (action.type) {
+
+        case 'ADD_POST':
             let newPost = {
                 id: 5,
                 post_text: state.NewPostText,
                 likes: 0,
             }
-            state.postsData.push(newPost);
-            state.NewPostText = '';
-            return state;
+            state_copy.postsData = [...state.postsData];
+            state_copy.postsData.push(newPost);
+            state_copy.NewPostText = '';
+            // state.postsData.push(newPost);
+            // state.NewPostText = '';
+            return state_copy;
 
         case 'UPDATE_NEW_POST_TEXT':
-
-            state.NewPostText = action.newText;
-            return state;
+            state_copy.NewPostText = action.newText;
+            return state_copy;
 
         default:
             console.log('Updated. Nothing changed!')
-            return state;
+            return state_copy;
     }
 
 }
