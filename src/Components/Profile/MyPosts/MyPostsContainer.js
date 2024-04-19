@@ -1,6 +1,4 @@
-import style from "./MyPosts.module.css"
-import Post from "./Post/Post.js";
-import React from "react";
+
 import {add_post_ActionCreator, update_new_post_text_ActionCreator} from "../../../redux/redux_store";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
@@ -24,7 +22,6 @@ import {connect} from "react-redux";
 //                  NewPostText={props.store.getState().profilePage.NewPostText}/>
 //     )
 // }
-
 let mapStateToProps = (state) => {
     return {
         profileData: state.profilePage

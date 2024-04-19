@@ -5,6 +5,7 @@ import Profile from "./Components/Profile/profile.js";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import React from "react";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
+import UsersContainer from "./Components/Users/UsersContainer.js";
 
 
 
@@ -17,8 +18,9 @@ const App = (props) => {
         <Navbar />
           <div className={'app-wrapper-content'}>
               <Routes>
-                  <Route path="/profile" element={<Profile store={props.store} />}/>
-                  <Route exact path="/dialogs" element={<DialogsContainer store={props.store}/>}/>
+                  <Route path="/profile" element={<Profile />}/>
+                  <Route exact path="/dialogs" element={<DialogsContainer />}/>
+                  <Route exact path="/users" element={<UsersContainer />}/>
               </Routes>
           </div>
       </div>

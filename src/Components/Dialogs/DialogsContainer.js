@@ -1,6 +1,3 @@
-import React from "react";
-import style from './Dialogs.module.css';
-import {Link} from "react-router-dom";
 import {send_message_ActionCreator, update_new_message_text_ActionCreator} from "../../redux/redux_store";
 import Dialogs from "./dialogs";
 import {connect} from "react-redux";
