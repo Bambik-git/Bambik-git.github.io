@@ -1,31 +1,29 @@
 import React from "react";
-
+import user_NoLogo_photo from '../../assets/man-user.svg'
+import axios from "axios";
 
 let Users = (props) => {
-    // if (props.users.length === 3){
-    //     props.set_users(
-    //         [
-    //             {
-    //                 id: 5,
-    //                 photoUrl: 'https://cdn4.iconfinder.com/data/icons/rcons-user/32/teacher_man_professor-1024.png',
-    //                 followed: true,
-    //                 full_name: 'Андрей',
-    //                 status: 'I am a boss',
-    //                 location: {city: 'Minsk', country: 'Belarus'}
-    //             },
-    //
-    //         ]
-    //     )
-    // }
+    let get_users = () => {
+        const instance = axios.create({
+            withCredentials: true,
+            baseURL: 'https://social-network.samuraijs.com/api/1.0',
+        })
 
+        if (props.users.length === 0) {
+            instance.get('/users').then(response => {
+                props.set_users(response.data.items);
+            });
+        }
+    }
 
     return (
         <div>
+            <button onClick={get_users}>Получить пользователей</button>
             {props.users.map(user =>
                 <div key={user.id}>
                 <span>
                     <div>
-                        <img src={user.photoUrl} alt={'avatar'} width={'70'} height={'70'}/>
+                        <img src={user.photos.small != null ? user.photos.small : user_NoLogo_photo} alt={'avatar'} width={'70'} height={'70'}/>
                     </div>
                     <div>
                         {
@@ -37,12 +35,12 @@ let Users = (props) => {
                 </span>
                     <span>
                     <span>
-                        <div>{user.full_name}</div>
+                        <div>{user.name}</div>
                         <div>{user.status}</div>
                     </span>
                     <span>
-                        <div>{user.location.country}</div>
-                        <div>{user.location.city}</div>
+                        <div>{'user.location.country'}</div>
+                        <div>{'user.location.city'}</div>
                     </span>
                 </span>
                 </div>)}

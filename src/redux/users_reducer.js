@@ -1,29 +1,29 @@
 let initial_state = {
     users_data: [
-        {
-            id: 1,
-            photoUrl: 'https://cdn4.iconfinder.com/data/icons/rcons-user/32/teacher_man_professor-1024.png',
-            followed: true,
-            full_name: 'Андрей',
-            status: 'I am a boss',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: 2,
-            photoUrl: 'https://yt3.googleusercontent.com/ytc/AGIKgqOHCTkejlph3FozMpeSJwfV3VMbb2PlVI4cHSiyEA=s900-c-k-c0x00ffffff-no-rj',
-            followed: true,
-            full_name: 'Сережа',
-            status: 'I am here!',
-            location: {city: 'Moscow', country: 'Russia'}
-        },
-        {
-            id: 3,
-            photoUrl: 'https://yt3.ggpht.com/a/AATXAJxE2eBzqjMnlZA0LEHgaDaTQIfLLlKaXqzuKw=s900-c-k-c0xffffffff-no-rj-mo',
-            followed: false,
-            full_name: 'Ваня',
-            status: 'Hello!',
-            location: {city: 'Kiev', country: 'Ukraine'}
-        },
+        // {
+        //     id: 1,
+        //     photoUrl: 'https://cdn4.iconfinder.com/data/icons/rcons-user/32/teacher_man_professor-1024.png',
+        //     followed: true,
+        //     full_name: 'Андрей',
+        //     status: 'I am a boss',
+        //     location: {city: 'Minsk', country: 'Belarus'}
+        // },
+        // {
+        //     id: 2,
+        //     photoUrl: 'https://yt3.googleusercontent.com/ytc/AGIKgqOHCTkejlph3FozMpeSJwfV3VMbb2PlVI4cHSiyEA=s900-c-k-c0x00ffffff-no-rj',
+        //     followed: true,
+        //     full_name: 'Сережа',
+        //     status: 'I am here!',
+        //     location: {city: 'Moscow', country: 'Russia'}
+        // },
+        // {
+        //     id: 3,
+        //     photoUrl: 'https://yt3.ggpht.com/a/AATXAJxE2eBzqjMnlZA0LEHgaDaTQIfLLlKaXqzuKw=s900-c-k-c0xffffffff-no-rj-mo',
+        //     followed: false,
+        //     full_name: 'Ваня',
+        //     status: 'Hello!',
+        //     location: {city: 'Kiev', country: 'Ukraine'}
+        // },
     ],
 }
 export const usersReducer = (state=initial_state, action) => {
