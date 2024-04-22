@@ -1,30 +1,8 @@
 let initial_state = {
-    users_data: [
-        // {
-        //     id: 1,
-        //     photoUrl: 'https://cdn4.iconfinder.com/data/icons/rcons-user/32/teacher_man_professor-1024.png',
-        //     followed: true,
-        //     full_name: 'Андрей',
-        //     status: 'I am a boss',
-        //     location: {city: 'Minsk', country: 'Belarus'}
-        // },
-        // {
-        //     id: 2,
-        //     photoUrl: 'https://yt3.googleusercontent.com/ytc/AGIKgqOHCTkejlph3FozMpeSJwfV3VMbb2PlVI4cHSiyEA=s900-c-k-c0x00ffffff-no-rj',
-        //     followed: true,
-        //     full_name: 'Сережа',
-        //     status: 'I am here!',
-        //     location: {city: 'Moscow', country: 'Russia'}
-        // },
-        // {
-        //     id: 3,
-        //     photoUrl: 'https://yt3.ggpht.com/a/AATXAJxE2eBzqjMnlZA0LEHgaDaTQIfLLlKaXqzuKw=s900-c-k-c0xffffffff-no-rj-mo',
-        //     followed: false,
-        //     full_name: 'Ваня',
-        //     status: 'Hello!',
-        //     location: {city: 'Kiev', country: 'Ukraine'}
-        // },
-    ],
+    users_data: [    ],
+    page_size: 100,
+    total_users_count: 100,
+    current_page: 1,
 }
 export const usersReducer = (state=initial_state, action) => {
     switch (action.type) {
@@ -49,8 +27,14 @@ export const usersReducer = (state=initial_state, action) => {
                 })
             }
         case SET_USERS:
-            return {...state, users_data: [...state.users_data, ...action.users]}
+            return {...state, users_data: [...action.users]}
 
+        case SET_CURRENT_PAGE:
+            return {...state, current_page: action.current_page}
+
+        case SET_TOTAL_USERS_COUNT:
+            debugger;
+            return {...state, total_users_count: action.total_users_count}
 
         default:
             console.log('Updated. Nothing changed!')
@@ -62,6 +46,8 @@ export const usersReducer = (state=initial_state, action) => {
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 
 export const follow_ActionCreator = (user_id) => {
     return { type: FOLLOW, user_id: user_id }
@@ -71,4 +57,10 @@ export const unfollow_ActionCreator = (user_id) => {
 }
 export const set_users_ActionCreator = (users) => {
     return { type: SET_USERS, users: users }
+}
+export const set_current_page_ActionCreator = (current_page) => {
+    return { type: SET_CURRENT_PAGE, current_page: current_page }
+}
+export const set_total_users_count_ActionCreator = (total_users_count) => {
+    return { type: SET_TOTAL_USERS_COUNT, total_users_count: total_users_count }
 }
