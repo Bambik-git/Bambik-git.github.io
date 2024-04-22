@@ -3,6 +3,7 @@ let initial_state = {
     page_size: 100,
     total_users_count: 100,
     current_page: 1,
+    is_fetching: true,
 }
 export const usersReducer = (state=initial_state, action) => {
     switch (action.type) {
@@ -32,6 +33,9 @@ export const usersReducer = (state=initial_state, action) => {
         case SET_CURRENT_PAGE:
             return {...state, current_page: action.current_page}
 
+        case TOGGLE_IS_FETCHING:
+            return {...state, is_fetching: action.is_fetching}
+
         case SET_TOTAL_USERS_COUNT:
             debugger;
             return {...state, total_users_count: action.total_users_count}
@@ -48,6 +52,7 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
 export const follow_ActionCreator = (user_id) => {
     return { type: FOLLOW, user_id: user_id }
@@ -63,4 +68,7 @@ export const set_current_page_ActionCreator = (current_page) => {
 }
 export const set_total_users_count_ActionCreator = (total_users_count) => {
     return { type: SET_TOTAL_USERS_COUNT, total_users_count: total_users_count }
+}
+export const toggle_is_fetching_ActionCreator = (is_fetching) => {
+    return { type: TOGGLE_IS_FETCHING, is_fetching }
 }
