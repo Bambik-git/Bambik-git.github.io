@@ -1,10 +1,8 @@
 
 import {connect} from "react-redux";
 import {
-    follow_ActionCreator,
-    set_current_page_ActionCreator, set_total_users_count_ActionCreator,
-    set_users_ActionCreator, toggle_is_fetching_ActionCreator,
-    unfollow_ActionCreator
+    follow, set_current_page, set_total_users_count,
+    set_users, toggle_is_fetching, unfollow
 } from "../../redux/users_reducer";
 import React from "react";
 import axios from "axios";
@@ -39,6 +37,10 @@ class UsersContainer extends React.Component {
         });
     }
 
+    componentWillUnmount() {
+        this.props.set_current_page(1);
+    }
+
     render() {
         return <>
             {this.props.is_fetching ? <Preloader /> :
@@ -55,7 +57,6 @@ class UsersContainer extends React.Component {
 
 }
 
-
 let mapStateToProps = (state) => {
     return {
         users: state.usersPage.users_data,
@@ -66,26 +67,35 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (user_id) => {
-            dispatch(follow_ActionCreator(user_id))
-        },
-        unfollow: (user_id) => {
-            dispatch(unfollow_ActionCreator(user_id))
-        },
-        set_users: (users) => {
-            dispatch(set_users_ActionCreator(users))
-        },
-        set_current_page: (current_page) => {
-            dispatch(set_current_page_ActionCreator(current_page))
-        },
-        set_total_users_count: (total_users_count) => {
-            dispatch(set_total_users_count_ActionCreator(total_users_count))
-        },
-        toggle_is_fetching: (is_fetching) => {
-            dispatch(toggle_is_fetching_ActionCreator(is_fetching))
-        }
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+// let mapDispatchToProps = (dispatch) => {
+//     return {
+//         follow: (user_id) => {
+//             dispatch(follow_ActionCreator(user_id))
+//         },
+//         unfollow: (user_id) => {
+//             dispatch(unfollow_ActionCreator(user_id))
+//         },
+//         set_users: (users) => {
+//             dispatch(set_users_ActionCreator(users))
+//         },
+//         set_current_page: (current_page) => {
+//             dispatch(set_current_page_ActionCreator(current_page))
+//         },
+//         set_total_users_count: (total_users_count) => {
+//             dispatch(set_total_users_count_ActionCreator(total_users_count))
+//         },
+//         toggle_is_fetching: (is_fetching) => {
+//             dispatch(toggle_is_fetching_ActionCreator(is_fetching))
+//         }
+//     }
+// }
+
+export default connect(mapStateToProps, {
+    follow,
+    unfollow,
+    set_users,
+    set_current_page,
+    set_total_users_count,
+    toggle_is_fetching
+})(UsersContainer);
+

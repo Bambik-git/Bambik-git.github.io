@@ -1,5 +1,5 @@
 let initial_state = {
-    users_data: [    ],
+    users_data: [ ],
     page_size: 100,
     total_users_count: 100,
     current_page: 1,
@@ -54,21 +54,21 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
-export const follow_ActionCreator = (user_id) => {
-    return { type: FOLLOW, user_id: user_id }
+export const follow = (user_id) => {
+    return { type: FOLLOW, user_id }
 }
-export const unfollow_ActionCreator = (user_id) => {
-    return { type: UNFOLLOW, user_id: user_id }
+export const unfollow = (user_id) => {
+    return { type: UNFOLLOW, user_id }
 }
-export const set_users_ActionCreator = (users) => {
-    return { type: SET_USERS, users: users }
+export const set_users = (users) => {
+    return { type: SET_USERS, users }
 }
-export const set_current_page_ActionCreator = (current_page) => {
-    return { type: SET_CURRENT_PAGE, current_page: current_page }
+export const set_current_page = (current_page) => {
+    return { type: SET_CURRENT_PAGE, current_page }
 }
-export const set_total_users_count_ActionCreator = (total_users_count) => {
-    return { type: SET_TOTAL_USERS_COUNT, total_users_count: total_users_count }
+export const set_total_users_count = (total_users_count) => {
+    return { type: SET_TOTAL_USERS_COUNT, total_users_count }
 }
-export const toggle_is_fetching_ActionCreator = (is_fetching) => {
+export const toggle_is_fetching = (is_fetching) => {
     return { type: TOGGLE_IS_FETCHING, is_fetching }
 }
