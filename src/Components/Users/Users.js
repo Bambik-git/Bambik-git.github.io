@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./Users.module.css";
 import user_NoLogo_photo from "../../assets/man-user.svg";
+import {Link} from "react-router-dom";
 
 let Users = (props) => {
 
@@ -23,8 +24,10 @@ let Users = (props) => {
                 <div key={user.id}>
                 <span>
                     <div>
+                        <Link to={`/profile/${user.id}`}>
                         <img src={user.photos.small != null ? user.photos.small : user_NoLogo_photo} alt={'avatar'}
                              width={'70'} height={'70'}/>
+                        </Link>
                     </div>
                     <div>
                         {

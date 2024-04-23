@@ -37,7 +37,6 @@ export const usersReducer = (state=initial_state, action) => {
             return {...state, is_fetching: action.is_fetching}
 
         case SET_TOTAL_USERS_COUNT:
-            debugger;
             return {...state, total_users_count: action.total_users_count}
 
         default:

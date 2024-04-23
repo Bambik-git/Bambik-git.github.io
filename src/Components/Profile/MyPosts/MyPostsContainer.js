@@ -1,7 +1,6 @@
-
-import {add_post_ActionCreator, update_new_post_text_ActionCreator} from "../../../redux/redux_store";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
+import {add_post, update_new_post} from "../../../redux/profile_reducer";
 
 
 //Компонента обертка для другой компоненты. Компонента овтечает за данные и логику.
@@ -28,17 +27,20 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        onPostChange: (text) => {
-            dispatch(update_new_post_text_ActionCreator(text));
-        },
-        onAddPost: () => {
-            dispatch(add_post_ActionCreator());
-        }
-    }
-}
+// let mapDispatchToProps = (dispatch) => {
+//     return {
+//         onPostChange: (text) => {
+//             dispatch(update_new_post_text_ActionCreator(text));
+//         },
+//         onAddPost: () => {
+//             dispatch(add_post_ActionCreator());
+//         }
+//     }
+// }
 
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
+const MyPostsContainer = connect(mapStateToProps, {
+    add_post,
+    update_new_post
+})(MyPosts);
 
 export default MyPostsContainer;
