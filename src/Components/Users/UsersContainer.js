@@ -1,13 +1,14 @@
 
 import {connect} from "react-redux";
 import {
-    follow, set_current_page, set_total_users_count,
+    follow, follow_toggle_is_fetching, set_current_page, set_total_users_count,
     set_users, toggle_is_fetching, unfollow
 } from "../../redux/users_reducer";
 import React from "react";
 import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/preloader";
+import {get_users_API} from '../../API/API'
 
 class UsersContainer extends React.Component {
     constructor(props) {
@@ -15,14 +16,18 @@ class UsersContainer extends React.Component {
         this.instance = axios.create({
             withCredentials: true,
             baseURL: 'https://social-network.samuraijs.com/api/1.0',
+            headers : {
+                'API-KEY': '34f0d779-a61f-4db4-bd78-26a75ab1e0bf',
+            }
         })
     }
 
     componentDidMount() {
         this.props.toggle_is_fetching(true);
-        this.instance.get(`/users?page=${this.props.current_page}&count=${this.props.page_size}`).then(response => {
-            this.props.set_users(response.data.items);
-            this.props.set_total_users_count(response.data.totalCount);
+
+        get_users_API(this.props.current_page, this.props.page_size).then(data => {
+            this.props.set_users(data.items);
+            this.props.set_total_users_count(data.totalCount);
             this.props.toggle_is_fetching(false);
         });
 
@@ -31,8 +36,9 @@ class UsersContainer extends React.Component {
     on_page_changed = (page_number) => {
         this.props.toggle_is_fetching(true);
         this.props.set_current_page(page_number)
-        this.instance.get(`/users?page=${page_number}&count=${this.props.page_size}`).then(response => {
-            this.props.set_users(response.data.items);
+
+        get_users_API(page_number, this.props.page_size).then(data => {
+            this.props.set_users(data.items);
             this.props.toggle_is_fetching(false);
         });
     }
@@ -43,18 +49,19 @@ class UsersContainer extends React.Component {
 
     render() {
         return <>
-            {this.props.is_fetching ? <Preloader /> :
-            <Users total_users_count ={this.props.total_users_count}
-                      page_size={this.props.page_size}
-                      current_page={this.props.current_page}
-                      on_page_changed={this.on_page_changed}
-                      users={this.props.users}
-                      follow={this.props.follow}
-                      unfollow={this.props.unfollow}/>
+            {this.props.is_fetching ? <Preloader/> :
+                <Users total_users_count={this.props.total_users_count}
+                       page_size={this.props.page_size}
+                       current_page={this.props.current_page}
+                       on_page_changed={this.on_page_changed}
+                       users={this.props.users}
+                       follow={this.props.follow}
+                       unfollow={this.props.unfollow}
+                       follow_toggle_is_fetching={this.props.follow_toggle_is_fetching}
+                       follow_is_fetching={this.props.follow_is_fetching}/>
             }
-            </>
+        </>
     }
-
 }
 
 let mapStateToProps = (state) => {
@@ -64,6 +71,7 @@ let mapStateToProps = (state) => {
         total_users_count: state.usersPage.total_users_count,
         current_page: state.usersPage.current_page,
         is_fetching: state.usersPage.is_fetching,
+        follow_is_fetching: state.usersPage.follow_is_fetching,
     }
 }
 
@@ -96,6 +104,7 @@ export default connect(mapStateToProps, {
     set_users,
     set_current_page,
     set_total_users_count,
-    toggle_is_fetching
+    toggle_is_fetching,
+    follow_toggle_is_fetching
 })(UsersContainer);
 

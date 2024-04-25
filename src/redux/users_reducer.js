@@ -4,6 +4,7 @@ let initial_state = {
     total_users_count: 100,
     current_page: 1,
     is_fetching: true,
+    follow_is_fetching: [ ]
 }
 export const usersReducer = (state=initial_state, action) => {
     switch (action.type) {
@@ -36,6 +37,15 @@ export const usersReducer = (state=initial_state, action) => {
         case TOGGLE_IS_FETCHING:
             return {...state, is_fetching: action.is_fetching}
 
+        case FOLLOW_TOGGLE_IS_FETCHING:
+            debugger;
+            return {
+                ...state,
+                follow_is_fetching: action.is_fetching
+                    ? [...state.follow_is_fetching, action.user_id]
+                    : state.follow_is_fetching.filter(id => id !== action.user_id)
+            }
+
         case SET_TOTAL_USERS_COUNT:
             return {...state, total_users_count: action.total_users_count}
 
@@ -52,6 +62,7 @@ const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const FOLLOW_TOGGLE_IS_FETCHING = 'FOLLOW_TOGGLE_IS_FETCHING';
 
 export const follow = (user_id) => {
     return { type: FOLLOW, user_id }
@@ -70,4 +81,7 @@ export const set_total_users_count = (total_users_count) => {
 }
 export const toggle_is_fetching = (is_fetching) => {
     return { type: TOGGLE_IS_FETCHING, is_fetching }
+}
+export const follow_toggle_is_fetching = (is_fetching, user_id) => {
+    return {type: FOLLOW_TOGGLE_IS_FETCHING, is_fetching, user_id}
 }
