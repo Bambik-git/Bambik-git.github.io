@@ -8,3 +8,8 @@
     background-color: chartreuse;
     padding-top: 10px;
 }
+
+.login_block {
+    float: right;
+    color: white;
+}
