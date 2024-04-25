@@ -28,6 +28,7 @@ export const dialogsReducer = (state=initial_state, action) => {
             return state_copy;
 
         case SEND_MESSAGE:
+            debugger;
             let Message = {
                 id: 4,
                 message: state.NewMessageText

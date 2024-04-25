@@ -16,7 +16,7 @@ const ProfileInfo = (props) => {
                      src={"https://ic.pics.livejournal.com/kapuchin/11418467/533811/533811_original.jpg"}/>
             </div>
             <div>
-                    <img alt={'Profile_logo'} src={props.profile.photos.large ? props.profile.photos.large : user_NoLogo_photo} width={'200'} height={'200'} />
+                    {/*<img alt={'Profile_logo'} src={props.profile.photos.large ? props.profile.photos.large : user_NoLogo_photo} width={'200'} height={'200'} />*/}
             </div>
             <div className={style.item}>
                 Some content

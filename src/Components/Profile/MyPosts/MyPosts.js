@@ -25,8 +25,8 @@ const  MyPosts = (props) => {
                 New Post<br/>
                 <textarea ref={newPostElement}
                           value={props.profileData.NewPostText}
-                          onChange={onPostChange} /><br/>
-                <button onClick={onAddPost}> Add post </button>
+                          onChange={(e) => props.update_new_post(e.target.value)} /><br/>
+                <button onClick={() => props.add_post()}> Add post </button>
                 <button>Remove</button>
             </div>
             <div className={style.posts}>
