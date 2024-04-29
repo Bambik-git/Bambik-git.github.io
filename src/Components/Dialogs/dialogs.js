@@ -1,6 +1,6 @@
 import React from "react";
 import style from './Dialogs.module.css';
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 
 
 const Dialogs = (props) => {
@@ -17,6 +17,10 @@ const Dialogs = (props) => {
 
     let onSendMessage = () => {
         props.onSendMessage()
+    }
+
+    if (!props.isAuth) {
+        return <Navigate to={'/login'} />
     }
 
     return (

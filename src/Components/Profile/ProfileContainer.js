@@ -1,36 +1,27 @@
 import React from "react";
 import Profile from "./profile";
-import axios from "axios";
 import {connect} from "react-redux";
-import {add_post, set_user_profile, update_new_post} from "../../redux/profile_reducer";
+import {add_post, getUsersProfileThunk, update_new_post} from "../../redux/profile_reducer";
 import {
+    Navigate,
     useLocation,
     useNavigate,
     useParams,
 } from "react-router-dom";
 
 class ProfileContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.instance = axios.create({
-            withCredentials: true,
-            baseURL: 'https://social-network.samuraijs.com/api/1.0',
-        })
-    }
 
     componentDidMount() {
         let userId = this.props.router.params.userId;
         if (!userId) {
             userId = 2;
         }
-        debugger;
-        this.instance.get(`/profile/${userId}`).then(response => {
-            this.props.set_user_profile(response.data);
-        });
+        this.props.getUsersProfileThunk(userId)
 
     }
 
     render() {
+        if(!this.props.isAuth) return <Navigate to={'/login'}/>
         return (
         <div>
             <Profile {...this.props} profile ={this.props.profile}/>
@@ -40,7 +31,8 @@ class ProfileContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
 })
 
 function withRouter(Component) {
@@ -60,7 +52,7 @@ function withRouter(Component) {
 }
 
 export default connect(mapStateToProps, {
-    set_user_profile,
+    getUsersProfileThunk,
     add_post,
     update_new_post,
 })(withRouter(ProfileContainer));
