@@ -3,9 +3,9 @@ import style from "./Users.module.css";
 import user_NoLogo_photo from "../../assets/man-user.svg";
 import {Link} from "react-router-dom";
 import {follow_API, unfollow_API} from "../../API/API.js";
+import {unfollowThunkCreator} from "../../redux/users_reducer";
 
 let Users = (props) => {
-    debugger;
     let pages_count = Math.ceil(props.total_users_count / props.page_size);
     let pages = [];
     for (let i=1; i < pages_count+1; i++) {
@@ -13,27 +13,25 @@ let Users = (props) => {
     }
 
 
-    let follow = (user_id) => {
-        props.follow_toggle_is_fetching(true, user_id);
-        follow_API(user_id).then(data => {
-            if (data.resultCode === 0) {
-                props.follow(user_id);
-            }
-        })
-        console.log(props.follow_is_fetching);
-        props.follow_toggle_is_fetching(false, user_id);
-    }
-
-    let unfollow = (user_id) => {
-        props.follow_toggle_is_fetching(true, user_id);
-        unfollow_API(user_id).then(data => {
-            if (data.resultCode === 0) {
-                props.unfollow(user_id);
-            }
-        })
-        console.log(props.follow_is_fetching);
-        props.follow_toggle_is_fetching(false, user_id);
-    }
+    // let follow = (user_id) => {
+    //     props.follow_toggle_is_fetching(true, user_id);
+    //     follow_API(user_id).then(data => {
+    //         if (data.resultCode === 0) {
+    //             props.follow(user_id);
+    //         }
+    //     })
+    //     props.follow_toggle_is_fetching(false, user_id);
+    // }
+    //
+    // let unfollow = (user_id) => {
+    //     props.follow_toggle_is_fetching(true, user_id);
+    //     unfollow_API(user_id).then(data => {
+    //         if (data.resultCode === 0) {
+    //             props.unfollow(user_id);
+    //         }
+    //     })
+    //     props.follow_toggle_is_fetching(false, user_id);
+    // }
 
     return (
         <div>
@@ -56,8 +54,8 @@ let Users = (props) => {
                     <div>
                         {
                             user.followed
-                                ? <button disabled={props.follow_is_fetching.some(id => id === user.id)} onClick={() => { unfollow(user.id) } }>Unfollow</button>
-                                : <button disabled={props.follow_is_fetching.some(id => id === user.id)} onClick={() => { follow(user.id) } }>Follow</button>
+                                ? <button disabled={props.follow_is_fetching.some(id => id === user.id)} onClick={() => { props.unfollowThunkCreator(user.id) } }>Unfollow</button>
+                                : <button disabled={props.follow_is_fetching.some(id => id === user.id)} onClick={() => { props.followThunkCreator(user.id) } }>Follow</button>
                         }
                     </div>
                 </span>

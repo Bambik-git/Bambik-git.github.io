@@ -1,3 +1,5 @@
+import {get_profile} from "../API/API";
+
 let initial_state = {
     postsData: [
         {id:1, post_text:'My first post', likes: 4},
@@ -55,4 +57,11 @@ export const update_new_post = (text) => {
 }
 export const set_user_profile = (profile) => {
     return { type: SET_USER_PROFILE, profile }
+}
+
+
+export const getUsersProfileThunk = (user_id) => (dispatch) => {
+    get_profile(user_id).then(data => {
+        dispatch(set_user_profile(data));
+    })
 }

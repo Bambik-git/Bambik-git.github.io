@@ -1,3 +1,5 @@
+import {get_users_API, follow_API} from "../API/API";
+
 let initial_state = {
     users_data: [ ],
     page_size: 100,
@@ -84,4 +86,46 @@ export const toggle_is_fetching = (is_fetching) => {
 }
 export const follow_toggle_is_fetching = (is_fetching, user_id) => {
     return {type: FOLLOW_TOGGLE_IS_FETCHING, is_fetching, user_id}
+}
+
+//делает асинхронную работу и диспачит функции
+export const getUsersThunkCreator = (current_page, page_size) => {
+    return (dispatch) => {
+        dispatch(toggle_is_fetching(true));
+        dispatch(set_current_page(current_page));
+
+        get_users_API(current_page, page_size).then(data => {
+            dispatch(set_users(data.items));
+            dispatch(set_total_users_count(data.totalCount));
+            dispatch(toggle_is_fetching(false));
+        });
+    }
+}
+
+export const unfollowThunkCreator = (user_id) => {
+    return (dispatch) => {
+
+        dispatch(follow_toggle_is_fetching(true, user_id));
+        follow_API(user_id, 'unfollow').then(data => {
+            if (data.resultCode === 0) {
+                dispatch(unfollow(user_id));
+            }
+        })
+        dispatch(follow_toggle_is_fetching(false, user_id));
+    }
+
+}
+
+export const followThunkCreator = (user_id) => {
+    return (dispatch) => {
+
+        dispatch(follow_toggle_is_fetching(true, user_id));
+        follow_API(user_id, 'follow').then(data => {
+            if (data.resultCode === 0) {
+                dispatch(follow(user_id));
+            }
+        })
+        dispatch(follow_toggle_is_fetching(false, user_id));
+    }
+
 }
