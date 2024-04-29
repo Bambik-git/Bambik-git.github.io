@@ -18,16 +18,6 @@ import Preloader from "../common/Preloader/preloader";
 import {get_users_API} from '../../API/API'
 
 class UsersContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.instance = axios.create({
-            withCredentials: true,
-            baseURL: 'https://social-network.samuraijs.com/api/1.0',
-            headers : {
-                'API-KEY': '34f0d779-a61f-4db4-bd78-26a75ab1e0bf',
-            }
-        })
-    }
 
     componentDidMount() {
 

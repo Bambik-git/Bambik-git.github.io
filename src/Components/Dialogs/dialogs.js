@@ -10,19 +10,6 @@ const Dialogs = (props) => {
     let NewMessageText = props.dialogsData.NewMessageText
 
     //event обьект события onChange
-    let onNewMessageChange = (event) => {
-        let text = event.target.value;
-        props.onNewMessageChange(text)
-    }
-
-    let onSendMessage = () => {
-        props.onSendMessage()
-    }
-
-    if (!props.isAuth) {
-        return <Navigate to={'/login'} />
-    }
-
     return (
         <div className={style.dialogs}>
             <div className={style.dialogsItems}>
@@ -39,7 +26,7 @@ const Dialogs = (props) => {
             <div>
                 <textarea value={NewMessageText}
                           placeholder={'Enter message'}
-                          onChange={(e) => props.onNewMessageChange(e.target.value)}/><br/>
+                          onChange={(event) => props.onNewMessageChange(event.target.value)}/><br/>
                 <button onClick={ () =>  props.onSendMessage()  }>Отправить</button>
             </div>
 
