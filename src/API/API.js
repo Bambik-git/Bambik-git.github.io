@@ -15,14 +15,26 @@ export let get_users_API = (page_number, page_size) => {
     })
 }
 
-export let follow_API = (user_id) => {
-    return instance.post(`/follow/${user_id}`).then(response => {
+export let follow_API = (user_id, action) => {
+    if (action === 'follow') {
+        return instance.post(`/follow/${user_id}`).then(response => {
+            return response.data
+        })
+    } else if (action === 'unfollow') {
+    return instance.delete(`/follow/${user_id}`).then(response => {
         return response.data
     })
 }
+}
 
-export let unfollow_API = (user_id) => {
-    return instance.delete(`/follow/${user_id}`).then(response => {
+export let get_profile= (userId) =>{
+    return instance.get(`/profile/${userId}`).then(response => {
+        return response.data
+    });
+}
+
+export let auth_API = () => {
+    return instance.get(`/auth/me`).then(response => {
         return response.data
     })
 }
