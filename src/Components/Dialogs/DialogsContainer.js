@@ -26,7 +26,7 @@ import {compose} from "redux";
 
 
 
-let AuthRedirectComponent = withAuthRedirect(Dialogs)
+// let AuthRedirectComponent = withAuthRedirect(Dialogs)
 
 let mapStateToProps = (state) => {
     return {

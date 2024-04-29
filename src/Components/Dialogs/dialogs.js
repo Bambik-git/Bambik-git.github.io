@@ -1,6 +1,6 @@
 import React from "react";
 import style from './Dialogs.module.css';
-import {Link, Navigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
 const Dialogs = (props) => {
