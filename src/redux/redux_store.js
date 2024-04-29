@@ -1,8 +1,9 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import {profileReducer} from "./profile_reducer.js";
 import {dialogsReducer} from "./dialogs_reducer.js";
 import {usersReducer} from "./users_reducer";
 import {authReducer} from "./auth_reducer";
+import {thunk as thunkMiddleWare} from 'redux-thunk';
 
 let CombineReducers = combineReducers({
     profilePage: profileReducer,
@@ -11,9 +12,9 @@ let CombineReducers = combineReducers({
     auth: authReducer,
 });
 
-let store = createStore(CombineReducers);
+let store = createStore(CombineReducers, applyMiddleware(thunkMiddleWare));
 
-window.store = store;
+// window.store = store;
 
 
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
