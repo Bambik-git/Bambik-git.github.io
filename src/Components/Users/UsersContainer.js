@@ -1,7 +1,6 @@
 
 import {connect} from "react-redux";
 import {
-    follow,
     follow_toggle_is_fetching,
     followThunkCreator,
     getUsersThunkCreator,
@@ -12,10 +11,10 @@ import {
     unfollowThunkCreator
 } from "../../redux/users_reducer";
 import React from "react";
-import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/preloader";
-import {get_users_API} from '../../API/API'
+import {compose} from "redux";
+import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
 
 class UsersContainer extends React.Component {
 
@@ -100,14 +99,27 @@ let mapStateToProps = (state) => {
 //     }
 // }
 
-export default connect(mapStateToProps, {
-    set_users,
-    set_current_page,
-    set_total_users_count,
-    toggle_is_fetching,
-    follow_toggle_is_fetching,
-    getUsersThunkCreator,
-    unfollowThunkCreator,
-    followThunkCreator
-})(UsersContainer);
+// export default connect(mapStateToProps, {
+//     set_users,
+//     set_current_page,
+//     set_total_users_count,
+//     toggle_is_fetching,
+//     follow_toggle_is_fetching,
+//     getUsersThunkCreator,
+//     unfollowThunkCreator,
+//     followThunkCreator
+// })(UsersContainer);
 
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, {
+        set_users,
+        set_current_page,
+        set_total_users_count,
+        toggle_is_fetching,
+        follow_toggle_is_fetching,
+        getUsersThunkCreator,
+        unfollowThunkCreator,
+        followThunkCreator
+    })
+)(UsersContainer);
