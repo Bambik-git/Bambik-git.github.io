@@ -38,3 +38,11 @@ export let auth_API = () => {
         return response.data
     })
 }
+
+export let getStatus = (user_id) =>{
+    return instance.get(`/profile/status/${user_id}`)
+}
+
+export let updateStatus = (status) =>{
+    return instance.put('/profile/status', {status})
+}

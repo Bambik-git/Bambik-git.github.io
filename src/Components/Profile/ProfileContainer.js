@@ -1,7 +1,13 @@
 import React from "react";
 import Profile from "./profile";
 import {connect} from "react-redux";
-import {add_post, getUsersProfileThunk, update_new_post} from "../../redux/profile_reducer";
+import {
+    add_post,
+    getStatusThunk,
+    getUsersProfileThunk,
+    update_new_post,
+    updateStatusThunk
+} from "../../redux/profile_reducer";
 import {
     useLocation,
     useNavigate,
@@ -18,13 +24,16 @@ class ProfileContainer extends React.Component {
             userId = 31110;
         }
         this.props.getUsersProfileThunk(userId)
+        this.props.getStatusThunk(userId)
 
     }
 
     render() {
         return (
         <div>
-            <Profile {...this.props} profile ={this.props.profile}/>
+            <Profile {...this.props}
+                     profile ={this.props.profile}
+                     updateStatus={this.props.updateStatusThunk}/>
         </div>
         )
     }
@@ -56,6 +65,7 @@ function withRouter(Component) {
 
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
+    status: state.profilePage.status,
 })
 
 export default compose(
@@ -63,6 +73,8 @@ export default compose(
         getUsersProfileThunk,
         add_post,
         update_new_post,
+        getStatusThunk,
+        updateStatusThunk
     }),
     withRouter,
     withAuthRedirect,

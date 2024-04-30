@@ -1,4 +1,4 @@
-import {get_profile} from "../API/API";
+import {get_profile, getStatus, updateStatus} from "../API/API";
 
 let initial_state = {
     postsData: [
@@ -7,7 +7,8 @@ let initial_state = {
         {id:3, post_text:'My third post', likes: 25},
     ],
     NewPostText: '',
-    profile: null
+    profile: null,
+    status: ''
 }
 
 export const profileReducer = (state=initial_state, action) => {
@@ -35,8 +36,10 @@ export const profileReducer = (state=initial_state, action) => {
             return {...state, NewPostText: action.text};
 
         case SET_USER_PROFILE:
-            debugger;
             return {...state, profile: action.profile};
+
+        case SET_STATUS:
+            return {...state, status: action.status};
 
         default:
             console.log('Updated. Nothing changed!')
@@ -48,6 +51,7 @@ export const profileReducer = (state=initial_state, action) => {
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_STATUS = 'SET_STATUS';
 
 export const add_post = () => {
     return { type: ADD_POST }
@@ -58,10 +62,27 @@ export const update_new_post = (text) => {
 export const set_user_profile = (profile) => {
     return { type: SET_USER_PROFILE, profile }
 }
+export const set_status = (status) => {
+    return { type: SET_STATUS, status }
+}
 
 
 export const getUsersProfileThunk = (user_id) => (dispatch) => {
     get_profile(user_id).then(data => {
         dispatch(set_user_profile(data));
+    })
+}
+
+export const getStatusThunk = (user_id) => (dispatch) => {
+    getStatus(user_id).then(response => {
+        dispatch(set_status(response.data))
+    })
+}
+
+export const updateStatusThunk = (status) => (dispatch) => {
+    updateStatus(status).then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(set_status(status))
+        }
     })
 }
