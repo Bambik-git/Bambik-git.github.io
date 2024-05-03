@@ -43,9 +43,9 @@ const Login = (props) => {
             >
                 {(status) => (
                     <Form>
-                        <p>{status && status.status.errors && (
-                            <div className="message">{status.status.errors}</div>
-                        )}</p>
+                        {/*<p>{status && status.status.errors && (*/}
+                        {/*    <div className="message">{status.status.errors}</div>*/}
+                        {/*)}</p>*/}
 
                         <div>
                             <Field type={'text'} name={'email'} placeholder={'e-mail'}/>

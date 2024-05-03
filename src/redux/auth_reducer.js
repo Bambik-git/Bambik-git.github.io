@@ -17,7 +17,7 @@ export const authReducer = (state=initial_state, action) => {
             }
 
         default:
-            console.log('Updated. Nothing changed!')
+            console.log('Auth')
             return state;
     }
 }
