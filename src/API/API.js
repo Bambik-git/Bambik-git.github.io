@@ -40,9 +40,16 @@ export let auth_API = () => {
 }
 
 export let getStatus = (user_id) =>{
-    return instance.get(`/profile/status/${user_id}`)
+    return instance.get(`/profile/status/${user_id}`);
 }
 
 export let updateStatus = (status) =>{
-    return instance.put('/profile/status', {status})
+    return instance.put('/profile/status', {status});
+}
+
+export let login = (email, password, rememberMe = false) =>{
+    return instance.post('/auth/login', {email, password, rememberMe});
+}
+export let logout = () =>{
+    return instance.delete('/auth/login', );
 }
