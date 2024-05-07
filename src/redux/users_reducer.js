@@ -52,7 +52,6 @@ export const usersReducer = (state=initial_state, action) => {
             return {...state, total_users_count: action.total_users_count}
 
         default:
-            console.log('Users')
             return state;
     }
 }

@@ -42,7 +42,6 @@ export const dialogsReducer = (state=initial_state, action) => {
             return state_copy;
 
         default:
-            console.log('dialogs')
             return state;
     }
 }

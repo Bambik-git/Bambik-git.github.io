@@ -42,7 +42,6 @@ export const profileReducer = (state=initial_state, action) => {
             return {...state, status: action.status};
 
         default:
-            console.log('profile')
             return {...state};
     }
 
