@@ -1,5 +1,6 @@
 import style from "./Post.module.css"
-const  Post = (props) => {
+import React from "react";
+const  Post = React.memo(props => {
     return (
         <div className={style.item}>
             <img src={'https://pixelbox.ru/wp-content/uploads/2023/12/avatar-youtube-pixelbox.ru-126.jpg'} alt={'avatar'}/><br/>
@@ -7,6 +8,6 @@ const  Post = (props) => {
             <span>Likes: {props.likes}</span><br/>
         </div>
     )
-}
+})
 
 export default Post;

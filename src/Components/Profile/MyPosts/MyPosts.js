@@ -2,21 +2,13 @@ import style from "./MyPosts.module.css"
 import Post from "./Post/Post.js";
 import React from "react";
 
-const  MyPosts = (props) => {
+const MyPosts = React.memo(props => {
+
     let postsElements = props.profileData.postsData
-        .map( posts => <Post message={posts.post_text} likes={posts.likes}/>)
+        .map(posts => <Post message={posts.post_text} likes={posts.likes}/>)
 
     // Создание ссылки и привязка к тегу textarea
     let newPostElement = React.createRef()
-
-    const onAddPost =() => {
-        props.onAddPost();
-    }
-
-    let onPostChange = () => {
-        let text = newPostElement.current.value
-        props.onPostChange(text);
-    }
 
     return (
         <div className={style.content}>
@@ -25,8 +17,8 @@ const  MyPosts = (props) => {
                 New Post<br/>
                 <textarea ref={newPostElement}
                           value={props.profileData.NewPostText}
-                          onChange={(e) => props.update_new_post(e.target.value)} /><br/>
-                <button onClick={() => props.add_post()}> Add post </button>
+                          onChange={(e) => props.update_new_post(e.target.value)}/><br/>
+                <button onClick={() => props.add_post()}> Add post</button>
                 <button>Remove</button>
             </div>
             <div className={style.posts}>
@@ -34,6 +26,6 @@ const  MyPosts = (props) => {
             </div>
         </div>
     )
-}
+});
 
 export default MyPosts;
