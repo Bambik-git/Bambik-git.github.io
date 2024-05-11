@@ -1,4 +1,4 @@
-import {send_message_ActionCreator, update_new_message_text_ActionCreator} from "../../redux/redux_store";
+import {send_message_ActionCreator, update_new_message_text_ActionCreator} from "../../redux/dialogs_reducer";
 import Dialogs from "./dialogs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../HOC/WithAuthRedirect";

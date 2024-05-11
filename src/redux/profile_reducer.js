@@ -2,16 +2,16 @@ import {get_profile, getStatus, updateStatus} from "../API/API";
 
 let initial_state = {
     postsData: [
-        {id:1, post_text:'My first post', likes: 4},
-        {id:2, post_text:'My second post', likes: 10},
-        {id:3, post_text:'My third post', likes: 25},
+        {id: 1, post_text: 'My first post', likes: 4},
+        {id: 2, post_text: 'My second post', likes: 10},
+        {id: 3, post_text: 'My third post', likes: 25},
     ],
     NewPostText: '',
     profile: null,
     status: ''
 }
 
-export const profileReducer = (state=initial_state, action) => {
+export const profileReducer = (state = initial_state, action) => {
 
     switch (action.type) {
 
@@ -21,10 +21,6 @@ export const profileReducer = (state=initial_state, action) => {
                 post_text: state.NewPostText,
                 likes: 0,
             }
-
-            // state_copy.postsData = [...state.postsData];
-            // state_copy.postsData.push(newPost);
-            // state_copy.NewPostText = '';
             return {
                 ...state,
                 NewPostText: '',
@@ -32,7 +28,6 @@ export const profileReducer = (state=initial_state, action) => {
             };
 
         case UPDATE_NEW_POST_TEXT:
-            // state_copy.NewPostText = action.text;
             return {...state, NewPostText: action.text};
 
         case SET_USER_PROFILE:
@@ -53,35 +48,32 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
 export const add_post = () => {
-    return { type: ADD_POST }
+    return {type: ADD_POST}
 }
 export const update_new_post = (text) => {
-    return { type: UPDATE_NEW_POST_TEXT, text }
+    return {type: UPDATE_NEW_POST_TEXT, text}
 }
 export const set_user_profile = (profile) => {
-    return { type: SET_USER_PROFILE, profile }
+    return {type: SET_USER_PROFILE, profile}
 }
 export const set_status = (status) => {
-    return { type: SET_STATUS, status }
+    return {type: SET_STATUS, status}
 }
 
 
-export const getUsersProfileThunk = (user_id) => (dispatch) => {
-    get_profile(user_id).then(data => {
-        dispatch(set_user_profile(data));
-    })
+export const getUsersProfileThunk = (user_id) => async (dispatch) => {
+    let data = await get_profile(user_id)
+    dispatch(set_user_profile(data));
 }
 
-export const getStatusThunk = (user_id) => (dispatch) => {
-    getStatus(user_id).then(response => {
-        dispatch(set_status(response.data))
-    })
+export const getStatusThunk = (user_id) => async (dispatch) => {
+    let response = await getStatus(user_id)
+    dispatch(set_status(response.data))
 }
 
-export const updateStatusThunk = (status) => (dispatch) => {
-    updateStatus(status).then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(set_status(status))
-        }
-    })
+export const updateStatusThunk = (status) => async (dispatch) => {
+    let response = await updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(set_status(status))
+    }
 }

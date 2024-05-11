@@ -1,14 +1,12 @@
 
 import {connect} from "react-redux";
 import {
-    follow_toggle_is_fetching,
-    followThunkCreator,
+    follow_toggle_is_fetching, followingThunkCreator,
     getUsersThunkCreator,
     set_current_page,
     set_total_users_count,
     set_users,
     toggle_is_fetching,
-    unfollowThunkCreator
 } from "../../redux/users_reducer";
 import React from "react";
 import Users from "./Users";
@@ -19,29 +17,13 @@ import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-
+        debugger;
         this.props.getUsersThunkCreator(this.props.current_page, this.props.page_size);
-        // this.props.toggle_is_fetching(true);
-        //
-        // get_users_API(this.props.current_page, this.props.page_size).then(data => {
-        //     this.props.set_users(data.items);
-        //     this.props.set_total_users_count(data.totalCount);
-        //     this.props.toggle_is_fetching(false);
-        // });
-
     }
 
     on_page_changed = (page_number) => {
 
         this.props.getUsersThunkCreator(page_number, this.props.page_size);
-
-        // this.props.toggle_is_fetching(true);
-        // this.props.set_current_page(page_number)
-        //
-        // get_users_API(page_number, this.props.page_size).then(data => {
-        //     this.props.set_users(data.items);
-        //     this.props.toggle_is_fetching(false);
-        // });
     }
 
     componentWillUnmount() {
@@ -58,8 +40,7 @@ class UsersContainer extends React.Component {
                        follow_is_fetching={this.props.follow_is_fetching}
 
                        on_page_changed={this.on_page_changed}
-                       unfollowThunkCreator={this.props.unfollowThunkCreator}
-                       followThunkCreator={this.props.followThunkCreator}/>
+                       followingThunkCreator={this.props.followingThunkCreator}/>
             }
         </>
     }
@@ -76,40 +57,6 @@ let mapStateToProps = (state) => {
     }
 }
 
-// let mapDispatchToProps = (dispatch) => {
-//     return {
-//         follow: (user_id) => {
-//             dispatch(follow_ActionCreator(user_id))
-//         },
-//         unfollow: (user_id) => {
-//             dispatch(unfollow_ActionCreator(user_id))
-//         },
-//         set_users: (users) => {
-//             dispatch(set_users_ActionCreator(users))
-//         },
-//         set_current_page: (current_page) => {
-//             dispatch(set_current_page_ActionCreator(current_page))
-//         },
-//         set_total_users_count: (total_users_count) => {
-//             dispatch(set_total_users_count_ActionCreator(total_users_count))
-//         },
-//         toggle_is_fetching: (is_fetching) => {
-//             dispatch(toggle_is_fetching_ActionCreator(is_fetching))
-//         }
-//     }
-// }
-
-// export default connect(mapStateToProps, {
-//     set_users,
-//     set_current_page,
-//     set_total_users_count,
-//     toggle_is_fetching,
-//     follow_toggle_is_fetching,
-//     getUsersThunkCreator,
-//     unfollowThunkCreator,
-//     followThunkCreator
-// })(UsersContainer);
-
 export default compose(
     withAuthRedirect,
     connect(mapStateToProps, {
@@ -119,7 +66,6 @@ export default compose(
         toggle_is_fetching,
         follow_toggle_is_fetching,
         getUsersThunkCreator,
-        unfollowThunkCreator,
-        followThunkCreator
+        followingThunkCreator
     })
 )(UsersContainer);
