@@ -1,75 +1,19 @@
 import React from "react";
-import style from "./Users.module.css";
-import user_NoLogo_photo from "../../assets/man-user.svg";
-import {Link} from "react-router-dom";
-import {follow_API, unfollow_API} from "../../API/API.js";
-import {unfollowThunkCreator} from "../../redux/users_reducer";
+import Paginator from "../common/Paginator/Paginator";
+import User from "./User";
 
 let Users = (props) => {
-    let pages_count = Math.ceil(props.total_users_count / props.page_size);
-    let pages = [];
-    for (let i=1; i < pages_count+1; i++) {
-        pages.push(i)
-    }
-
-
-    // let follow = (user_id) => {
-    //     props.follow_toggle_is_fetching(true, user_id);
-    //     follow_API(user_id).then(data => {
-    //         if (data.resultCode === 0) {
-    //             props.follow(user_id);
-    //         }
-    //     })
-    //     props.follow_toggle_is_fetching(false, user_id);
-    // }
-    //
-    // let unfollow = (user_id) => {
-    //     props.follow_toggle_is_fetching(true, user_id);
-    //     unfollow_API(user_id).then(data => {
-    //         if (data.resultCode === 0) {
-    //             props.unfollow(user_id);
-    //         }
-    //     })
-    //     props.follow_toggle_is_fetching(false, user_id);
-    // }
 
     return (
         <div>
-            <div className={'pagination'}>
-                {pages.map(p => <span className={props.current_page === p && style.selectedPage}
-                                      onClick={() => {
-                                          props.on_page_changed(p)
-                                      }}>{p}</span>)}
-
-            </div>
-            {props.users.map(user =>
-                <div key={user.id}>
-                <span>
-                    <div>
-                        <Link to={`/profile/${user.id}`}>
-                        <img src={user.photos.small != null ? user.photos.small : user_NoLogo_photo} alt={'avatar'}
-                             width={'70'} height={'70'}/>
-                        </Link>
-                    </div>
-                    <div>
-                        {
-                            user.followed
-                                ? <button disabled={props.follow_is_fetching.some(id => id === user.id)} onClick={() => { props.unfollowThunkCreator(user.id) } }>Unfollow</button>
-                                : <button disabled={props.follow_is_fetching.some(id => id === user.id)} onClick={() => { props.followThunkCreator(user.id) } }>Follow</button>
-                        }
-                    </div>
-                </span>
-                    <span>
-                    <span>
-                        <div>{user.name}</div>
-                        <div>{user.status}</div>
-                    </span>
-                    <span>
-                        <div>{'user.location.country'}</div>
-                        <div>{'user.location.city'}</div>
-                    </span>
-                </span>
-                </div>)}
+            <Paginator current_page={props.current_page}
+                       total_users_count={props.total_users_count}
+                       page_size={props.page_size}
+                       on_page_changed={props.on_page_changed}/>
+            {props.users.map(user => <User user={user}
+                                          key={user.id}
+                                          follow_is_fetching={props.follow_is_fetching}
+                                          followingThunkCreator={props.followingThunkCreator} />)}
         </div>)
 }
 
