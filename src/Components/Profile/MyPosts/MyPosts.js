@@ -4,7 +4,8 @@ import React from "react";
 
 const MyPosts = React.memo(props => {
 
-    let postsElements = props.profileData.postsData
+    let postsElements = [...props.profileData.postsData]
+        .reverse()
         .map(posts => <Post message={posts.post_text} likes={posts.likes}/>)
 
     // Создание ссылки и привязка к тегу textarea
