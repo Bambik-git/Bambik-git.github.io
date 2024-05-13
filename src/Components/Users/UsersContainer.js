@@ -17,18 +17,16 @@ import {withAuthRedirect} from "../../HOC/WithAuthRedirect";
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        debugger;
         this.props.getUsersThunkCreator(this.props.current_page, this.props.page_size);
     }
 
     on_page_changed = (page_number) => {
-
         this.props.getUsersThunkCreator(page_number, this.props.page_size);
     }
 
-    componentWillUnmount() {
-        this.props.set_current_page(1);
-    }
+    // componentWillUnmount() {
+    //     this.props.set_current_page(1);
+    // }
 
     render() {
         return <>
