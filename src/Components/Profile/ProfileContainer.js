@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {
     add_post,
     getStatusThunk,
-    getUsersProfileThunk,
+    getUsersProfileThunk, savePhotoThunk,
     update_new_post,
     updateStatusThunk
 } from "../../redux/profile_reducer";
@@ -18,7 +18,7 @@ import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
 
-    componentDidMount() {
+    refreshProfile () {
         let userId = this.props.router.params.userId;
         if (!userId) {
             userId = this.props.auth_user_id;
@@ -28,6 +28,16 @@ class ProfileContainer extends React.Component {
 
         this.props.getUsersProfileThunk(userId)
         this.props.getStatusThunk(userId)
+    }
+
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.router.params.userId !== prevProps.router.params.userId){
+            this.refreshProfile()
+        }
 
     }
 
@@ -35,8 +45,10 @@ class ProfileContainer extends React.Component {
         return (
         <div>
             <Profile {...this.props}
+                     isOwner = {!this.props.router.params.userId}
                      profile ={this.props.profile}
-                     updateStatus={this.props.updateStatusThunk}/>
+                     updateStatus={this.props.updateStatusThunk}
+                     savePhoto={this.props.savePhotoThunk}/>
         </div>
         )
     }
@@ -80,7 +92,8 @@ export default compose(
         add_post,
         update_new_post,
         getStatusThunk,
-        updateStatusThunk
+        updateStatusThunk,
+        savePhotoThunk,
     }),
     withRouter,
     withAuthRedirect,
