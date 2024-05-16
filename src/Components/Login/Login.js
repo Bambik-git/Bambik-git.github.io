@@ -33,11 +33,11 @@ const Login = ({isAuth, loginTC}) => {
                 }}
                 // validationSchema={loginFormSchema}
             >
-                {(status) => (
+                {({status}) => (
                     <Form>
-                        {/*<p>{status && status.status.errors && (*/}
-                        {/*    <div className="message">{status.status.errors}</div>*/}
-                        {/*)}</p>*/}
+                        <p>{status && status.message && (
+                            <div className="message">{status.message}</div>
+                        )}</p>
 
                         <div>
                             <Field type={'text'} name={'email'} placeholder={'e-mail'}/>
@@ -53,7 +53,7 @@ const Login = ({isAuth, loginTC}) => {
                             <Field type={'checkbox'} name={'rememberMe'}/>
                             <label htmlFor={'rememberMe'}> remember me </label>
                         </div>
-                        <ErrorMessage name="status" component="div"/>
+                        <ErrorMessage name="rememberMe" component="div"/>
 
                         <button type={'submit'}>Log in</button>
                     </Form>

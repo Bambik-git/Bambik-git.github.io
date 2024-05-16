@@ -26,7 +26,6 @@ export const set_user_data = (userId, login, email, isAuth) => { return { type: 
 
 export const getAuthUserData = () => async (dispatch) => {
     let data = await auth_API()
-    debugger;
     if (data.resultCode === 0) {
         let {id, login, email} = data.data;
         dispatch(set_user_data(id, login, email, true));
@@ -39,8 +38,7 @@ export const loginTC = (email, password, rememberMe, setStatus) => async (dispat
             dispatch(getAuthUserData())
         } else {
             let error_msg = response.data.messages[0]
-            debugger;
-            setStatus({errors: error_msg})
+            setStatus({message: error_msg})
         }
 }
 
