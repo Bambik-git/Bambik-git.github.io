@@ -1,4 +1,5 @@
-import {get_profile, getStatus, savePhoto, updateStatus} from "../API/API";
+import {get_profile, getStatus, login, savePhoto, saveProfile, updateStatus} from "../API/API";
+import {getAuthUserData} from "./auth_reducer";
 
 let initial_state = {
     postsData: [
@@ -69,25 +70,39 @@ export const save_photo_success = (photos) => {
 
 
 export const getUsersProfileThunk = (user_id) => async (dispatch) => {
-    let data = await get_profile(user_id)
+    const data = await get_profile(user_id)
     dispatch(set_user_profile(data));
 }
 
 export const getStatusThunk = (user_id) => async (dispatch) => {
-    let response = await getStatus(user_id)
+    const response = await getStatus(user_id)
     dispatch(set_status(response.data))
 }
 
 export const updateStatusThunk = (status) => async (dispatch) => {
-    let response = await updateStatus(status)
+    const response = await updateStatus(status)
     if (response.data.resultCode === 0) {
         dispatch(set_status(status))
     }
 }
 
 export const savePhotoThunk = (file) => async (dispatch) => {
-    let response = await savePhoto(file)
+    const response = await savePhoto(file)
     if (response.data.resultCode === 0) {
         dispatch(save_photo_success(response.data.data.photos))
+    }
+}
+
+export const editProfile = (formData, setStatus) => async (dispatch, getState) => {
+    const user_id = getState().auth.userId;
+    // let contacts = {'facebook' : null, 'github': 'dasdasdasd'}
+    // let f = {...formData, contacts: {...contacts}}
+    console.log({...formData})
+    const response = await saveProfile({...formData})
+    if (response.data.resultCode === 0) {
+        dispatch(getUsersProfileThunk(user_id));
+    } else {
+        let error_msg = response.data.messages[0]
+        setStatus({errors: error_msg})
     }
 }

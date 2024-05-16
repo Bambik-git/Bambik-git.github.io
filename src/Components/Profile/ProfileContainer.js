@@ -2,7 +2,7 @@ import React from "react";
 import Profile from "./profile";
 import {connect} from "react-redux";
 import {
-    add_post,
+    add_post, editProfile,
     getStatusThunk,
     getUsersProfileThunk, savePhotoThunk,
     update_new_post,
@@ -48,7 +48,8 @@ class ProfileContainer extends React.Component {
                      isOwner = {!this.props.router.params.userId}
                      profile ={this.props.profile}
                      updateStatus={this.props.updateStatusThunk}
-                     savePhoto={this.props.savePhotoThunk}/>
+                     savePhoto={this.props.savePhotoThunk}
+                     editProfile={this.props.editProfile}/>
         </div>
         )
     }
@@ -94,6 +95,7 @@ export default compose(
         getStatusThunk,
         updateStatusThunk,
         savePhotoThunk,
+        editProfile,
     }),
     withRouter,
     withAuthRedirect,

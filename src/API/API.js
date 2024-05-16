@@ -63,3 +63,6 @@ export let savePhoto = (photoFile) => {
         }
     } )
 }
+export let saveProfile = (formData) =>{
+    return instance.put('/profile', formData);
+}
