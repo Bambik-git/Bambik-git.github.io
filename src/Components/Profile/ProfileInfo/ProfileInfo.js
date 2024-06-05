@@ -1,78 +1,76 @@
-import style from "../Profile.module.css";
+import './ProfileInfo.css'
 import Preloader from "../../common/Preloader/preloader";
 import React, {useState} from "react";
-import userNoLogo from '../../../assets/man-user.svg'
-import ProfileStatus from "./ProfileStatus";
-import {ProfileEditForm} from "./ProfileEditForm";
+import userNoLogo from '../../../assets/no_logo.svg'
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import {ProfileEdit} from "./ProfileEdit/ProfileEdit";
+import ProfileData from "./ProfileData/ProfileData";
 
 
-const ProfileInfo = (props) => {
 
+const ProfileInfo = ({profile, isOwner, status, updateStatus, savePhoto, editProfile}) => {
+    //Переход в режим редактирования страницы профиля
     const [editMode, setEditMode] = useState(false)
-    
-    if (!props.profile) {
-        return <Preloader />
+
+    //Если профиль не загрузился
+    if (!profile) {
+        return <Preloader/>
     }
 
-    const onSavePhoto = (e) =>{
+    //Загрузка фотографии с помощью <input type='file'>
+    const onSavePhoto = (e) => {
         if (e.target.files.length) {
-            props.savePhoto(e.target.files[0]);
+            savePhoto(e.target.files[0]);
         }
     }
 
     return (
-        <div>
-            {/*<div>*/}
-            {/*    <img className={style.profile_img} alt={'profile-img'}*/}
-            {/*         src={"https://ic.pics.livejournal.com/kapuchin/11418467/533811/533811_original.jpg"}/>*/}
-            {/*</div>*/}
-            <div>   {props.profile ?
-                <img alt={'Profile_logo'} src={props.profile.photos.large || userNoLogo} width={'200'} height={'200'}/>
-                : null
-            }
-                {props.isOwner && <input type={'file'} onChange={onSavePhoto}/>}
+        <>
+            <div className="section_profile">
+                <div className="section_title">
+                    <h2>Профиль</h2>
+                    {isOwner && !editMode && <div>
+                        <button className="default_btn" onClick={() => setEditMode(true)}>Изменить</button>
+                    </div>}
+                </div>
             </div>
+            <div className="page_profile__body">
+                <div className="page_profile__user_img">
+                    {profile ?
+                        <img alt={'Profile_logo'} src={profile.photos.large || userNoLogo}/>
+                        : null
+                    }
+                </div>
+                {isOwner && editMode &&
+                    <div className="upload_photo">
+                        {isOwner &&
+                                <input type={'file'} onChange={onSavePhoto}/>
+                        }
 
-            { editMode
-                ? <ProfileEditForm profile={props.profile}
-                                   editMode={setEditMode}
-                                   editProfile={props.editProfile}/>
-                : <ProfileData profile={props.profile}
-                               isOwner={props.isOwner}
-                               editMode={setEditMode}
-                               />}
+                    </div>
+                }
 
-            <div className={style.item}>
-                <ProfileStatus status={props.status}
-                               updateStatus={props.updateStatus}/>
+
+            <div className="page_profile__content">
+                    <div className="page_profile__user_status">
+                        <ProfileStatus status={status}
+                                       updateStatus={updateStatus}
+                                       isOwner={isOwner}/>
+
+                    </div>
+
+                    {editMode
+                        ? <ProfileEdit profile={profile}
+                                       setEditMode={setEditMode}
+                                       editProfile={editProfile}/>
+                        : <ProfileData profile={profile}
+                                       isOwner={isOwner}
+                                       editMode={setEditMode}
+                        />}
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
-
-const ProfileData = (props) => {
-    return <>
-    { props.isOwner && <div><button onClick={() => props.editMode(true)}>Edit</button></div> }
-        <div>
-            <b>Full name</b>: {props.profile.fullName}
-        </div>
-        <div>
-            <b>Looking for a job</b>: {props.profile.lookingForAJob ? 'yes' : 'no'}
-        </div>
-        {props.profile.lookingForAJob &&
-            <div>
-                <b>My professional skills</b>: {props.profile.lookingForAJobDescription}
-            </div>
-        }
-        <div>
-            <b>About me</b>: {props.profile.lookingForAJob}
-        </div>
-
-        <div>
-            <b>Contacts</b>:{Object.keys(props.profile.contacts).map(key => <div>
-            <b>{key}:</b> {props.profile.contacts[key]}</div>)}
-        </div>
-    </>
-}
 export default ProfileInfo;

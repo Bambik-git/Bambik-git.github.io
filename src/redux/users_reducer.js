@@ -2,7 +2,7 @@ import {get_users_API, follow_API} from "../API/API";
 
 let initial_state = {
     users_data: [],
-    page_size: 100,
+    page_size: 25,
     total_users_count: 100,
     current_page: 1,
     is_fetching: true,
@@ -30,7 +30,6 @@ export const usersReducer = (state = initial_state, action) => {
                 users_data: updateObjectInArray(state.users_data, action.user_id, 'id', {followed: false})
             }
         case SET_USERS:
-            debugger;
             return {...state, users_data: [...action.users]}
 
         case SET_CURRENT_PAGE:
@@ -40,7 +39,6 @@ export const usersReducer = (state = initial_state, action) => {
             return {...state, is_fetching: action.is_fetching}
 
         case FOLLOW_TOGGLE_IS_FETCHING:
-            debugger;
             return {
                 ...state,
                 follow_is_fetching: action.is_fetching
@@ -50,6 +48,9 @@ export const usersReducer = (state = initial_state, action) => {
 
         case SET_TOTAL_USERS_COUNT:
             return {...state, total_users_count: action.total_users_count}
+        case SELECT_PAGE_SIZE:
+            debugger;
+            return {...state, page_size: action.page_size}
 
         default:
             return state;
@@ -64,6 +65,7 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const FOLLOW_TOGGLE_IS_FETCHING = 'FOLLOW_TOGGLE_IS_FETCHING';
+const SELECT_PAGE_SIZE = 'SELECT_PAGE_SIZE';
 
 export const follow = (user_id) => {
     return {type: FOLLOW, user_id}
@@ -86,12 +88,15 @@ export const toggle_is_fetching = (is_fetching) => {
 export const follow_toggle_is_fetching = (is_fetching, user_id) => {
     return {type: FOLLOW_TOGGLE_IS_FETCHING, is_fetching, user_id}
 }
-
+export const select_page_size = (page_size) => {
+    return {type: SELECT_PAGE_SIZE, page_size}
+}
 
 
 //делает асинхронную работу и диспачит функции
 export const getUsersThunkCreator = (current_page, page_size) => {
     return async (dispatch) => {
+        debugger;
         dispatch(toggle_is_fetching(true));
         dispatch(set_current_page(current_page));
 

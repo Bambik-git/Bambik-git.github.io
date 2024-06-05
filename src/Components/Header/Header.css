@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  width: 40%;
+  min-width: 600px;
+  background-color: #A9CBB7;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+.header__user_login {
+  display: flex;
+  margin-left: auto;
+  margin-right: 10px;
+  align-items: center;
+  gap: 20px;
+}
+
+.header__user_img img {
+  width: 40px;
+  border-radius: 50%;
+}
+
+.header__user_name {
+  text-decoration: none;
+  color: #5E565A;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+.header__user_name > a {
+  color: #5E565A;
+}
+.header__user_name > a:hover {
+  color: #F0F0F0;
+}
+
+/*# sourceMappingURL=Header.css.map */

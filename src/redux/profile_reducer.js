@@ -3,13 +3,18 @@ import {getAuthUserData} from "./auth_reducer";
 
 let initial_state = {
     postsData: [
-        {id: 1, post_text: 'My first post', likes: 4},
-        {id: 2, post_text: 'My second post', likes: 10},
+        {id: 1, post_text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.\n' +
+                '                Alias architecto atque aut dolore earum eligendi exercitationem explicabo illo,\n' +
+                '                iure molestiae molestias nam nulla odit optio porro praesentium quibusdam vero voluptas.', likes: 4},
+        {id: 2, post_text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.\n' +
+                '                Alias architecto atque aut dolore earum eligendi exercitationem explicabo illo,\n' +
+                '                iure molestiae molestias nam nulla odit optio porro praesentium quibusdam vero voluptas.', likes: 10},
         {id: 3, post_text: 'My third post', likes: 25},
     ],
     NewPostText: '',
     profile: null,
-    status: ''
+    status: '',
+    error_post_message: null
 }
 
 export const profileReducer = (state = initial_state, action) => {
@@ -27,16 +32,15 @@ export const profileReducer = (state = initial_state, action) => {
                 NewPostText: '',
                 postsData: [...state.postsData, newPost]
             };
-
         case UPDATE_NEW_POST_TEXT:
             return {...state, NewPostText: action.text};
+        case CLEAR_POST:
+            return {...state, NewPostText: ''}
 
         case SET_USER_PROFILE:
             return {...state, profile: action.profile};
-
         case SET_STATUS:
             return {...state, status: action.status};
-
         case SAVE_PHOTO:
             return {...state, profile: {...state.profile, photos: action.photos}};
 
@@ -47,6 +51,7 @@ export const profileReducer = (state = initial_state, action) => {
 }
 
 const ADD_POST = 'ADD_POST';
+const CLEAR_POST = 'CLEAR_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
@@ -54,6 +59,9 @@ const SAVE_PHOTO = 'SAVE_PHOTO';
 
 export const add_post = () => {
     return {type: ADD_POST}
+}
+export const clear_post = () => {
+    return {type: CLEAR_POST}
 }
 export const update_new_post = (text) => {
     return {type: UPDATE_NEW_POST_TEXT, text}
@@ -95,8 +103,6 @@ export const savePhotoThunk = (file) => async (dispatch) => {
 
 export const editProfile = (formData, setStatus) => async (dispatch, getState) => {
     const user_id = getState().auth.userId;
-    // let contacts = {'facebook' : null, 'github': 'dasdasdasd'}
-    // let f = {...formData, contacts: {...contacts}}
     console.log({...formData})
     const response = await saveProfile({...formData})
     if (response.data.resultCode === 0) {
@@ -104,5 +110,7 @@ export const editProfile = (formData, setStatus) => async (dispatch, getState) =
     } else {
         let error_msg = response.data.messages[0]
         setStatus({errors: error_msg})
+        throw new Error(error_msg)
     }
+    debugger;
 }

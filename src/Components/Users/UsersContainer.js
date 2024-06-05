@@ -2,7 +2,7 @@
 import {connect} from "react-redux";
 import {
     follow_toggle_is_fetching, followingThunkCreator,
-    getUsersThunkCreator,
+    getUsersThunkCreator, select_page_size,
     set_current_page,
     set_total_users_count,
     set_users,
@@ -20,13 +20,19 @@ class UsersContainer extends React.Component {
         this.props.getUsersThunkCreator(this.props.current_page, this.props.page_size);
     }
 
-    on_page_changed = (page_number) => {
-        this.props.getUsersThunkCreator(page_number, this.props.page_size);
+
+    on_select_page_size = (e) => {
+        /*
+        Метод позволяет выбирать количество пользователей отображаемых на странице.
+        Автоматически переключает пользователя на первую страницу.
+        */
+        this.props.select_page_size(e.target.value)
+        this.props.getUsersThunkCreator(1, e.target.value)
     }
 
-    // componentWillUnmount() {
-    //     this.props.set_current_page(1);
-    // }
+    componentWillUnmount() {
+        this.props.set_current_page(1);
+    }
 
     render() {
         return <>
@@ -37,8 +43,9 @@ class UsersContainer extends React.Component {
                        users={this.props.users}
                        follow_is_fetching={this.props.follow_is_fetching}
 
-                       on_page_changed={this.on_page_changed}
-                       followingThunkCreator={this.props.followingThunkCreator}/>
+                       on_select_page_size={this.on_select_page_size}
+                       followingThunkCreator={this.props.followingThunkCreator}
+                       getUsersThunkCreator={this.props.getUsersThunkCreator}/>
             }
         </>
     }
@@ -64,6 +71,7 @@ export default compose(
         toggle_is_fetching,
         follow_toggle_is_fetching,
         getUsersThunkCreator,
-        followingThunkCreator
+        followingThunkCreator,
+        select_page_size
     })
 )(UsersContainer);

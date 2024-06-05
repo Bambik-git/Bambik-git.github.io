@@ -1,0 +1,20 @@
+.status_annotation{
+  font-size: 11px;
+}
+
+.status_input {
+  padding: 5px;
+  font-size: 14px;
+  width: 300px;
+}
+
+.status{
+  > span {
+    word-wrap: break-word;
+  }
+}
+
+.update_status_input {
+  display: inline-block;
+  text-align: center;
+}

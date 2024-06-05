@@ -1,0 +1,99 @@
+
+.page_profile__user_img {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  & img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+  }
+}
+
+.page_profile__user_status {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.page_profile_user_data {
+  width: 100%;
+  min-width: 200px;
+  & .edit_profile_item {
+    margin: 10px 0;
+    & label{
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.page_profile_user_data_contacts{
+  & h3 {
+    margin: 10px 0;
+  }
+}
+
+.edit_profile_input {
+  border: none;
+  border-radius: 5px;
+  background-color: #ebebeb;
+  min-width: 50%;
+  &:focus {
+    background-color:#F0F0F0;
+  }
+}
+
+.edit_profile_textarea {
+  display: inline-block;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  padding: 10px;
+  width: 90%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  resize: none;
+  word-wrap: break-word;
+  min-height: 100px;
+  background-color: #ebebeb;
+  &::placeholder {
+    color: #999;
+    opacity: 0.8;
+  }
+  &:focus {
+    background-color:#F0F0F0;
+  }
+}
+
+.page_profile_user_data_contacts{
+  & .edit_profile_item {
+    margin: 10px 0;
+    & input {
+      display: inline-block;
+    }
+    & label {
+      display: inline-block;
+      min-width: 100px;
+    }
+  }
+}
+
+input[type="radio"] {
+  display: inline-block;
+  & label {
+    display: inline;
+  }
+}
+
+.upload_profile_photo{
+  text-align: center;
+  margin-top: 10px;
+}
+.load_photo_input {
+  visibility: hidden;
+}
+
+.error_message_block{
+  text-align: center;
+  width: 50%;
+}

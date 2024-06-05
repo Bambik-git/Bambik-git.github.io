@@ -1,19 +1,28 @@
 import React from "react";
-import style from './Header.module.css';
+import style from './Header.css';
 import {Link} from "react-router-dom";
 import {logoutTC} from "../../redux/auth_reducer";
+import Navbar from "../Navbar/navbar";
 
-const Header = (props) => {
+const Header = ({logoutTC, isAuth, login}) => {
     return (
-        <header className={style.header}>
-            <img className={style.logo} src={'https://i.pinimg.com/originals/b9/05/3d/b9053d873e9f69058997913e0fffca2e.png'}
-                 alt={'logo'}/>
-             <div className={style.login_block}>
-                 { props.isAuth ?
-                     <div> {props.login} - <button onClick={props.logoutTC}>Log out</button> </div>:
-                     <Link to={'/login'}>Login</Link>}
-             </div>
+        <header className='header'>
+            <Navbar/>
+            <div className='header__user_login'>
+                {isAuth ?
+                    <>
+                        <button className="default_btn" onClick={logoutTC}>Выйти</button>
+                        <div className='header__user_name'>
+                            <Link to={'/profile'}>{login}</Link>
+                        </div>
+                    </>
+                    : <Link to={'/login'}>
+                        <button className="default_btn">Войти</button>
+                    </Link>
+                }
+            </div>
         </header>
+
     )
 }
 

@@ -1,0 +1,28 @@
+.section_body {
+  word-wrap: normal;
+  line-height: 25px;
+  font-size: 18px;
+  padding: 10px;
+}
+.section_body a {
+  color: #D0E588;
+}
+.section_body a:visited {
+  color: #CCDCC1;
+}
+.section_body a:hover {
+  color: #5E565A;
+}
+.section_body ul {
+  margin-left: 20px;
+}
+.section_body ul li {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+.section_body ul li::marker {
+  color: #A9CBB7;
+  font-size: 20px;
+}
+
+/*# sourceMappingURL=main.css.map */

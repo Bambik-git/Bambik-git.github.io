@@ -2,10 +2,10 @@ import React from "react";
 import Profile from "./profile";
 import {connect} from "react-redux";
 import {
-    add_post, editProfile,
+    editProfile,
     getStatusThunk,
-    getUsersProfileThunk, savePhotoThunk,
-    update_new_post,
+    getUsersProfileThunk,
+    savePhotoThunk,
     updateStatusThunk
 } from "../../redux/profile_reducer";
 import {
@@ -19,11 +19,15 @@ import {compose} from "redux";
 class ProfileContainer extends React.Component {
 
     refreshProfile () {
+        /*
+        Функция для обновления страницы профиля
+        userId - берется из текущего URL
+         */
         let userId = this.props.router.params.userId;
+        /*Если в URL пути не указан user_id профиля, значит переменная userId пустая. В этом случае загружается страница
+        авторизованного пользователя*/
         if (!userId) {
             userId = this.props.auth_user_id;
-            // userId = 31100;
-            // return redirect("/login")
         }
 
         this.props.getUsersProfileThunk(userId)
@@ -35,6 +39,9 @@ class ProfileContainer extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        /*
+        Если userId в URL пути изменился, то загружается страница нового пользователя.
+         */
         if (this.props.router.params.userId !== prevProps.router.params.userId){
             this.refreshProfile()
         }
@@ -42,6 +49,7 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
+        console.log('Profile Container')
         return (
         <div>
             <Profile {...this.props}
@@ -55,9 +63,10 @@ class ProfileContainer extends React.Component {
     }
 }
 
-// let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
-
 function withRouter(Component) {
+    /*
+    HOC позволяет извлекать данные из URL запроса в частности userId
+     */
     function ComponentWithRouterProp(props) {
         let location = useLocation();
         let navigate = useNavigate();
@@ -74,12 +83,6 @@ function withRouter(Component) {
     return ComponentWithRouterProp;
 }
 
-// export default connect(mapStateToProps, {
-//     getUsersProfileThunk,
-//     add_post,
-//     update_new_post,
-// })(withRouter(AuthRedirectComponent));
-
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
@@ -90,8 +93,6 @@ let mapStateToProps = (state) => ({
 export default compose(
     connect(mapStateToProps, {
         getUsersProfileThunk,
-        add_post,
-        update_new_post,
         getStatusThunk,
         updateStatusThunk,
         savePhotoThunk,

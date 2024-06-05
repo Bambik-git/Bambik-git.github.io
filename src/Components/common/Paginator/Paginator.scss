@@ -1,0 +1,26 @@
+@import '../../../styles/vars';
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px
+}
+
+.paginator_item {
+  border: 1px solid #F0F0F0;
+  padding: 5px 5px;
+  color: $color2;
+  &:hover {
+    background-color: #F0F0F0;
+    cursor: pointer;
+  }
+}
+
+.pagination_btn{
+  min-width: 10px;
+  min-height: 10px;
+}
+.pagination_active {
+  background-color: $color3;
+}

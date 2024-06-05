@@ -1,0 +1,11 @@
+.page_profile_user_data_contacts{
+  & h3 {
+    margin: 20px 0;
+  }
+}
+
+.page_profile_user_data_item{
+  & span {
+    word-wrap: break-word;
+  }
+}

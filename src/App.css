@@ -1,26 +1,75 @@
-.app-wrapper {
-  /*Все первые потомки класса app-wrapper(header, nav) будут в виде сетки*/
-  display: grid;
-  grid-template-areas:
-  "header header"
-  "nav content";
-  grid-template-rows:  100px 1fr;
-  grid-template-columns: 1fr 5fr;
-  /*grid-gap: 10px;*/
-
-  width: 1700px;
-  /*margin 0 auto; - верхний нижний отступы 0, справа слева auto*/
-  margin: 0 auto;
+.block {
+  display: block;
+  width: 40%;
+  min-height: 100px;
+  min-width: 600px;
+  border-radius: 10px;
+  margin: 20px auto 0 auto;
+  background-color: white;
+  padding: 20px;
 }
 
-.app-wrapper-content {
-  grid-area: content;
-  background-color: darkgray;
-  padding-top: 10px;
-  margin-top: 20px;
+.section_title {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ededed;
+}
+.section_title h2 {
+  font-size: 30px;
+  font-weight: 500;
+  color: #5E565A;
 }
 
+.basic-text--color-muted {
+  color: #999;
+}
 
+.default_btn {
+  padding: 6px 10px;
+  font-weight: 600;
+  font-family: inherit;
+  font-size: 14px;
+  color: #5E565A;
+  border-radius: 5px;
+  background-color: #D0E588;
+  align-content: end;
+  min-width: 110px;
+  min-height: 30px;
+}
+.default_btn:hover {
+  background-color: #CCDCC1;
+}
+.default_btn:active {
+  transform: scale(0.9, 0.9);
+}
 
+.default_input {
+  display: block;
+  border: 1px solid #999;
+  padding: 10px;
+  font-size: 16px;
+  font-family: inherit;
+}
 
+.error_message_block {
+  padding: 15px;
+  font-size: 16px;
+  width: 100%;
+  color: red;
+  font-weight: 500;
+  border-radius: 10px;
+  border: 1px solid red;
+  background-color: rgba(255, 0, 0, 0.1);
+  margin: 10px auto;
+  text-align: center;
+  vertical-align: center;
+  line-height: 20px;
+}
 
+.error_message_text {
+  color: red;
+  margin: 5px 0;
+}
+
+/*# sourceMappingURL=App.css.map */

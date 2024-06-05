@@ -1,0 +1,19 @@
+.post_button_align {
+  text-align: right;
+}
+.post_button_align button {
+  margin: 0 5px;
+}
+
+.post_error {
+  border: 1px solid red;
+}
+
+.post_error_message {
+  font-family: inherit;
+  color: red;
+  font-size: 13px;
+  margin-left: 60px;
+}
+
+/*# sourceMappingURL=CreatePost.css.map */

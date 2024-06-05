@@ -91,7 +91,6 @@ let store = {
     // }
 
     dispatch(action) {
-    debugger;
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
 
@@ -121,3 +120,4 @@ export const update_new_post_text_ActionCreator = (text) => {
 }
 
 export default store;
+

@@ -5,8 +5,12 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 import store from "./redux/redux_store";
 import {Provider} from "react-redux";
+import {getAuthUserData} from "./redux/auth_reducer";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+store.dispatch(getAuthUserData());
+
 root.render(
     <React.StrictMode>
         <Provider store={store}>
@@ -14,12 +18,6 @@ root.render(
         </Provider>
     </React.StrictMode>
 );
-
-
-
-// store.subscribe(() => {
-//     reRenderEntireTree();
-// });
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

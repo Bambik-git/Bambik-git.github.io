@@ -1,0 +1,60 @@
+.page_profile__user_img {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+}
+.page_profile__user_img img {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+}
+
+.page_profile__user_status {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.page_profile_user_data {
+  width: 100%;
+  min-width: 200px;
+}
+.page_profile_user_data div {
+  margin: 10px 0;
+}
+
+.section_title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.upload_photo {
+  position: relative;
+  text-align: center;
+  margin: 5px;
+}
+.upload_photo > input {
+  padding: 6px;
+  border-radius: 10px;
+}
+.upload_photo > input::file-selector-button {
+  cursor: pointer;
+  padding: 6px 10px;
+  font-weight: 600;
+  font-family: inherit;
+  font-size: 14px;
+  color: #5E565A;
+  border-radius: 5px;
+  background-color: #D0E588;
+  border: none;
+  align-content: end;
+  min-width: 110px;
+  min-height: 30px;
+}
+.upload_photo > input::file-selector-button:hover {
+  background-color: #CCDCC1;
+}
+.upload_photo > input::file-selector-button:active {
+  transform: scale(0.9, 0.9);
+}
+
+/*# sourceMappingURL=ProfileInfo.css.map */

@@ -1,0 +1,64 @@
+@import "../../../styles/vars";
+
+.page_profile__user_img {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  & img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+  }
+}
+
+.page_profile__user_status {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.page_profile_user_data {
+  width: 100%;
+  min-width: 200px;
+  & div {
+    margin: 10px 0;
+  }
+}
+
+.section_title {
+  display:flex;
+  justify-content: space-between;
+}
+
+
+
+
+.upload_photo {
+  position: relative;
+  text-align: center;
+  margin: 5px;
+  & > input {
+    padding: 6px;
+    border-radius: 10px;
+    &::file-selector-button {
+      cursor: pointer;
+      padding: 6px 10px;
+      font-weight: 600;
+      font-family: inherit;
+      font-size: 14px;
+      color: $color2;
+      border-radius: 5px;
+      background-color: $color3;
+      border: none;
+      align-content: end;
+      min-width: 110px;
+      min-height: 30px;
+      &:hover {
+        background-color: $color4;
+      }
+      &:active {
+        //background-color: $color5;
+        transform: scale(0.9, 0.9);
+      }
+    }
+  }
+}

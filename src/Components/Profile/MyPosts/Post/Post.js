@@ -1,13 +1,22 @@
-import style from "./Post.module.css"
 import React from "react";
-const  Post = React.memo(props => {
+import userNoLogo from "../../../../assets/no_logo.svg";
+import './Post.css'
+
+const Post = React.memo(({profile, message }) => {
+    console.log('CreatePost')
     return (
-        <div className={style.item}>
-            <img src={'https://pixelbox.ru/wp-content/uploads/2023/12/avatar-youtube-pixelbox.ru-126.jpg'} alt={'avatar'}/><br/>
-            {props.message}<br/>
-            <span>Likes: {props.likes}</span><br/>
+        <div className="block">
+            <div className="section_post">
+                <div className="section_post__user_img">
+                    {profile ?
+                        <img alt={'Profile_logo'} src={profile.photos.small || userNoLogo}/>
+                        : null
+                    }
+                </div>
+                <div className="section_post_item">{message}</div>
+            </div>
         </div>
-    )
+)
 })
 
 export default Post;

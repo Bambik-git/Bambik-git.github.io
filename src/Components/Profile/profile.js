@@ -1,20 +1,22 @@
-import style from "./Profile.module.css"
 import ProfileInfo from "./ProfileInfo/ProfileInfo.js";
 import MyPostsContrainer from "./MyPosts/MyPostsContainer";
 
 
-
-const Profile = (props) => {
+const Profile = ({status, profile, isOwner, updateStatus, savePhoto, editProfile}) => {
+    console.log('Profile')
     return (
-        <div className={style.content}>
-            <ProfileInfo profile={props.profile}
-                         isOwner={props.isOwner}
-                         status={props.status}
-                         updateStatus={props.updateStatus}
-                         savePhoto={props.savePhoto}
-                         editProfile={props.editProfile}/>
-            <MyPostsContrainer/>
-        </div>
+        <>
+            <div className='block'>
+                <ProfileInfo profile={profile}
+                             isOwner={isOwner}
+                             status={status}
+                             updateStatus={updateStatus}
+                             savePhoto={savePhoto}
+                             editProfile={editProfile}/>
+            </div>
+            {isOwner && <MyPostsContrainer profile={profile}/>}
+
+        </>
     )
 }
 

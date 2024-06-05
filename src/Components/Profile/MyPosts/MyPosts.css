@@ -1,0 +1,33 @@
+.send_post {
+  display: inline-block;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  padding: 10px;
+  width: 90%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  resize: none;
+  word-wrap: break-word;
+  height: 50px;
+}
+.send_post::placeholder {
+  color: #999;
+  opacity: 0.8;
+}
+
+.section_post {
+  display: flex;
+}
+
+.section_post__user_img {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px;
+}
+.section_post__user_img img {
+  width: 40px;
+  border-radius: 50%;
+}
+
+/*# sourceMappingURL=MyPosts.css.map */

@@ -1,0 +1,42 @@
+@import '../../styles/vars';
+
+
+.users_cards {
+  display: flex;
+  padding: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.user_item_card {
+  border: 3px solid #F0F0F0;
+  background-color: #F0F0F0;
+  border-radius: 10px;
+  height: 250px;
+  width: 200px;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+
+
+  & img {
+    height: 120px;
+    width: 120px;
+    border-radius: 100%;
+    margin: 5px 0;
+    cursor: pointer;
+  }
+
+  & span {
+    display: block;
+    margin: 10px 0;
+    cursor: pointer;
+  }
+  &:hover {
+    //background-color: #ffffff;
+    transform: scale(1.1, 1.1);
+  }
+}
+.user_name {
+  color: $color2;
+}
